@@ -1,5 +1,5 @@
 
-# PRESENTACIÓN Sistema Gestor de Ventas 
+# Sistema Gestor de Ventas 
 
 **Asignatura**: Bases de Datos I (FaCENA-UNNE)
 
