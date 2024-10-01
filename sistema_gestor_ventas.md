@@ -1,6 +1,3 @@
-# Proyecto de Estudio!
-    
-**Estructura del documento principal:**
 
 # PRESENTACIÓN Sistema Gestor de Ventas 
 
