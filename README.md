@@ -1,1 +1,1 @@
-# basesdatos_proyecto_estudio
+# Sistema Gestor de Ventas
