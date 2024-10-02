@@ -77,7 +77,7 @@ Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris t
 
 ### Diccionario de datos
 
-Acceso al documento [PDF](doc/Diccionario_Datos.pdf) del diccionario de datos.
+Acceso al documento [PDF](doc/Diccionarios_Datos.pdf) del diccionario de datos.
 
 
 ### Desarrollo TEMA 1 "----"
