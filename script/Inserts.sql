@@ -7,9 +7,9 @@ USE sistema_gestor_de_ventas
 INSERT INTO Categoria (nombre)
 VALUES 
 ('Frutas y Verduras'),
-('Lácteos'),
+('LÃ¡cteos'),
 ('Carnes y Embutidos'),
-('Panadería y Pastelería'),
+('PanaderÃ­a y PastelerÃ­a'),
 ('Bebidas'),
 ('Limpieza'),
 ('Higiene Personal'),
@@ -84,13 +84,13 @@ SELECT * FROM Proveedor
 
 INSERT INTO Usuario (DNI_usuario, nombre, email, pass, fecha_nacimiento, imagen_usuario, id_rol, id_estado)
 VALUES 
-('12345678', 'Juan Pérez', 'juan.perez@gmail.com', 'contraseña123', '2000-01-15', 'juan.jpg', 1, 1), -- Vendedor, Activo
-('23456789', 'María Gómez', 'maria.gomez@gmail.com', 'contraseña456', '1995-03-22', 'maria.jpg', 2, 1), -- Administrador, Activo
-('34567890', 'Carlos López', 'carlos.lopez@gmail.com', 'contraseña789', '2005-07-10', 'carlos.jpg', 3, 0), -- Supervisor, Inactivo
-('45678901', 'Ana Martínez', 'ana.martinez@gmail.com', 'contraseña101', '1990-05-30', 'ana.jpg', 1, 1), -- Vendedora, Activa
-('56789012', 'Luis Fernández', 'luis.fernandez@gmail.com', 'contraseña102', '1985-11-12', 'luis.jpg', 1, 1), -- Vendedor, Activo
-('67890123', 'Sofía Ruiz', 'sofia.ruiz@gmail.com', 'contraseña103', '1992-08-25', 'sofia.jpg', 1, 1), -- Vendedora, Activa
-('78901234', 'Roberto Torres', 'roberto.torres@gmail.com', 'contraseña104', '1980-03-15', 'roberto.jpg', 2, 1); -- Administrador, Activo
+('12345678', 'Juan PÃ©rez', 'juan.perez@gmail.com', 'contraseÃ±a123', '2000-01-15', 'juan.jpg', 1, 1), -- Vendedor, Activo
+('23456789', 'MarÃ­a GÃ³mez', 'maria.gomez@gmail.com', 'contraseÃ±a456', '1995-03-22', 'maria.jpg', 2, 1), -- Administrador, Activo
+('34567890', 'Carlos LÃ³pez', 'carlos.lopez@gmail.com', 'contraseÃ±a789', '2005-07-10', 'carlos.jpg', 3, 0), -- Supervisor, Inactivo
+('45678901', 'Ana MartÃ­nez', 'ana.martinez@gmail.com', 'contraseÃ±a101', '1990-05-30', 'ana.jpg', 1, 1), -- Vendedora, Activa
+('56789012', 'Luis FernÃ¡ndez', 'luis.fernandez@gmail.com', 'contraseÃ±a102', '1985-11-12', 'luis.jpg', 1, 1), -- Vendedor, Activo
+('67890123', 'SofÃ­a Ruiz', 'sofia.ruiz@gmail.com', 'contraseÃ±a103', '1992-08-25', 'sofia.jpg', 1, 1), -- Vendedora, Activa
+('78901234', 'Roberto Torres', 'roberto.torres@gmail.com', 'contraseÃ±a104', '1980-03-15', 'roberto.jpg', 2, 1); -- Administrador, Activo
 
 
 
@@ -99,48 +99,48 @@ VALUES
 
 INSERT INTO Cliente (DNI_cliente, nombre, correo, telefono, fecha_nacimiento, id_estado)
 VALUES 
-('89012345', 'Sofía Martínez', 'sofia.martinez@example.com', '456987123', '1994-11-20', 1),
+('89012345', 'SofÃ­a MartÃ­nez', 'sofia.martinez@example.com', '456987123', '1994-11-20', 1),
 ('90123456', 'Gabriel Torres', 'gabriel.torres@example.com', '123789456', '1991-02-15', 1),
-('01234567', 'Elena Ramírez', 'elena.ramirez@example.com', '987321654', '1987-05-25', 0),
-('22234567', 'Javier López', 'javier.lopez@example.com', '753159846', '1986-09-29', 1),
+('01234567', 'Elena RamÃ­rez', 'elena.ramirez@example.com', '987321654', '1987-05-25', 0),
+('22234567', 'Javier LÃ³pez', 'javier.lopez@example.com', '753159846', '1986-09-29', 1),
 ('33345678', 'Claudia Morales', 'claudia.morales@example.com', '852369741', '1990-12-19', 1),
-('44456789', 'David Sánchez', 'david.sanchez@example.com', '963852741', '1982-03-14', 0),
-('55567890', 'Patricia Jiménez', 'patricia.jimenez@example.com', '159753258', '1985-01-27', 1),
+('44456789', 'David SÃ¡nchez', 'david.sanchez@example.com', '963852741', '1982-03-14', 0),
+('55567890', 'Patricia JimÃ©nez', 'patricia.jimenez@example.com', '159753258', '1985-01-27', 1),
 ('66678901', 'Jorge Torres', 'jorge.torres@example.com', '258963147', '1992-07-15', 1),
-('77789012', 'Marta González', 'marta.gonzalez@example.com', '741258963', '1991-11-06', 0),
-('88890123', 'Ricardo Fernández', 'ricardo.fernandez@example.com', '369258147', '1984-08-30', 1),
-('99901234', 'Carmen Díaz', 'carmen.diaz@example.com', '147258369', '1980-12-12', 1),
+('77789012', 'Marta GonzÃ¡lez', 'marta.gonzalez@example.com', '741258963', '1991-11-06', 0),
+('88890123', 'Ricardo FernÃ¡ndez', 'ricardo.fernandez@example.com', '369258147', '1984-08-30', 1),
+('99901234', 'Carmen DÃ­az', 'carmen.diaz@example.com', '147258369', '1980-12-12', 1),
 ('01012345', 'Luis Alvarado', 'luis.alvarado@example.com', '258147963', '1986-04-24', 0),
 ('11123456', 'Gloria Castro', 'gloria.castro@example.com', '852147963', '1993-06-18', 1),
 ('12134567', 'Julio Morales', 'julio.morales@example.com', '951753684', '1989-10-09', 1),
 ('13145678', 'Nadia Ruiz', 'nadia.ruiz@example.com', '456159753', '1994-05-03', 1),
 ('14156789', 'Victor Medina', 'victor.medina@example.com', '369147852', '1995-11-15', 0),
-('15167890', 'Rosa Núñez', 'rosa.nunez@example.com', '741963852', '1991-08-17', 1),
+('15167890', 'Rosa NÃºÃ±ez', 'rosa.nunez@example.com', '741963852', '1991-08-17', 1),
 ('16178901', 'Omar Castillo', 'omar.castillo@example.com', '159852463', '1990-09-29', 1),
-('17189012', 'Nicolás Ramírez', 'nicolas.ramirez@example.com', '951753862', '1992-12-21', 1),
+('17189012', 'NicolÃ¡s RamÃ­rez', 'nicolas.ramirez@example.com', '951753862', '1992-12-21', 1),
 ('18190123', 'Isabel Torres', 'isabel.torres@example.com', '456123789', '1983-03-30', 0),
-('19201234', 'Rafael Gómez', 'rafael.gomez@example.com', '987654321', '1987-01-17', 1),
+('19201234', 'Rafael GÃ³mez', 'rafael.gomez@example.com', '987654321', '1987-01-17', 1),
 ('20312345', 'Yolanda Paredes', 'yolanda.paredes@example.com', '321654789', '1994-10-04', 1),
 ('21323456', 'Fernando Solis', 'fernando.solis@example.com', '654789123', '1985-05-11', 1),
 ('22334567', 'Cecilia Castro', 'cecilia.castro@example.com', '147852963',  '1988-07-22', 0),
 ('23345678', 'Diego Salazar', 'diego.salazar@example.com', '963258741', '1991-03-16', 1),
-('24356789', 'Andrea Ramírez', 'andrea.ramirez@example.com', '741852963', '1990-09-07', 1),
-('26378901', 'Erika López', 'erika.lopez@example.com', '147963258', '1986-06-20', 0),
+('24356789', 'Andrea RamÃ­rez', 'andrea.ramirez@example.com', '741852963', '1990-09-07', 1),
+('26378901', 'Erika LÃ³pez', 'erika.lopez@example.com', '147963258', '1986-06-20', 0),
 ('27389012', 'Esteban Flores', 'esteban.flores@example.com', '852741369', '1992-01-03', 1),
-('30312345', 'Luciana Peña', 'luciana.pena@example.com', '753951486', '1995-11-24', 1),
+('30312345', 'Luciana PeÃ±a', 'luciana.pena@example.com', '753951486', '1995-11-24', 1),
 ('31323456', 'Pablo Cordero', 'pablo.cordero@example.com', '159753486', '1987-08-07', 1),
-('34356789', 'Teresa González', 'teresa.gonzalez@example.com', '456321789', '1993-02-22', 1),
+('34356789', 'Teresa GonzÃ¡lez', 'teresa.gonzalez@example.com', '456321789', '1993-02-22', 1),
 ('35367890', 'Oscar Morales', 'oscar.morales@example.com', '789654123', '1992-03-29', 1),
-('36378901', 'Claudia Vázquez', 'claudia.vazquez@example.com', '321789654', '1988-11-05', 0),
+('36378901', 'Claudia VÃ¡zquez', 'claudia.vazquez@example.com', '321789654', '1988-11-05', 0),
 ('37389012', 'Victor Delgado', 'victor.delgado@example.com', '654321789', '1986-07-19', 1),
-('38390123', 'Adriana Méndez', 'adriana.mendez@example.com', '987456123', '1985-05-28', 1),
+('38390123', 'Adriana MÃ©ndez', 'adriana.mendez@example.com', '987456123', '1985-05-28', 1),
 
-('12345678', 'Pedro Ramírez', 'pedro.ramirez@example.com', '123456789', '1990-01-15', 1), 
-('23456789', 'Lucía Gómez', 'lucia.gomez@example.com', '987654321', '1985-03-22', 1),
+('12345678', 'Pedro RamÃ­rez', 'pedro.ramirez@example.com', '123456789', '1990-01-15', 1), 
+('23456789', 'LucÃ­a GÃ³mez', 'lucia.gomez@example.com', '987654321', '1985-03-22', 1),
 ('34567890', 'Diego Torres', 'diego.torres@example.com', '456789123', '1992-06-30', 0),
-('45678901', 'Natalia Díaz', 'natalia.diaz@example.com', '321654987', '1995-08-12', 1),
-('56789012', 'Fernando López', 'fernando.lopez@example.com', '654321789', '1989-12-02', 1),
-('67890123', 'Ana Fernández', 'ana.fernandez@example.com', '789123456', '1993-07-08', 1),
+('45678901', 'Natalia DÃ­az', 'natalia.diaz@example.com', '321654987', '1995-08-12', 1),
+('56789012', 'Fernando LÃ³pez', 'fernando.lopez@example.com', '654321789', '1989-12-02', 1),
+('67890123', 'Ana FernÃ¡ndez', 'ana.fernandez@example.com', '789123456', '1993-07-08', 1),
 ('78901234', 'Carlos Ruiz', 'carlos.ruiz@example.com', '321456987', '1988-10-10', 0)
 
 SELECT * FROM Cliente;
@@ -254,15 +254,15 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 (1003, 'Pechuga de Pollo', 'Pechuga de pollo fresca', 3.50, 100, 5.00, 2, 3, 1),
 (1004, 'Pan Integral', 'Pan integral de centeno', 1.00, 150, 1.50, 1, 4, 1),
 (1005, 'Jugo de Naranja', 'Jugo natural de naranja', 1.50, 100, 2.00, 1, 5, 1),
-(1006, 'Detergente Líquido', 'Detergente para lavar ropa', 2.00, 80, 3.00, 1, 6, 1),
-(1007, 'Champú', 'Champú hidratante', 1.80, 60, 2.50, 1, 7, 1),
+(1006, 'Detergente LÃ­quido', 'Detergente para lavar ropa', 2.00, 80, 3.00, 1, 6, 1),
+(1007, 'ChampÃº', 'ChampÃº hidratante', 1.80, 60, 2.50, 1, 7, 1),
 (1008, 'Pescado Congelado', 'Pescado fresco congelado', 4.00, 70, 6.00, 2, 8, 1),
 (1009, 'Arroz Blanco', 'Arroz blanco de grano largo', 0.60, 100, 1.00, 1, 9, 1),
 (1010, 'Chocolate con Almendras', 'Chocolate con trozos de almendra', 1.20, 120, 1.80, 1, 10, 1),
-(1011, 'Plátanos', 'Plátanos maduros', 0.20, 200, 0.40, 1, 1, 1),
+(1011, 'PlÃ¡tanos', 'PlÃ¡tanos maduros', 0.20, 200, 0.40, 1, 1, 1),
 (1012, 'Yogur Natural', 'Yogur bajo en grasa', 0.90, 100, 1.30, 1, 2, 1),
 (1013, 'Chorizo', 'Chorizo fresco', 3.00, 80, 4.50, 2, 3, 1),
-(1014, 'Croissants', 'Croissants recién horneados', 0.75, 150, 1.20, 1, 4, 1),
+(1014, 'Croissants', 'Croissants reciÃ©n horneados', 0.75, 150, 1.20, 1, 4, 1),
 (1015, 'Refresco de Cola', 'Bebida gaseosa sabor cola', 0.95, 100, 1.50, 1, 5, 1),
 (1016, 'Limpiador Multiusos', 'Limpiador multiusos para superficies', 1.50, 90, 2.00, 1, 6, 1),
 (1017, 'Desodorante', 'Desodorante antitranspirante', 1.20, 60, 1.80, 1, 7, 1),
@@ -274,8 +274,8 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 (1023, 'Salchichas', 'Salchichas frescas', 2.50, 100, 3.50, 2, 3, 1),
 (1024, 'Pan de Ajo', 'Pan con ajo y perejil', 1.20, 90, 1.80, 1, 4, 1),
 (1025, 'Agua Mineral', 'Agua mineral natural', 0.70, 150, 1.00, 1, 5, 1),
-(1026, 'Limpiador de Baño', 'Limpiador específico para baño', 2.50, 60, 3.50, 1, 6, 1),
-(1027, 'Jabón de Manos', 'Jabón líquido para manos', 1.00, 70, 1.50, 1, 7, 1),
+(1026, 'Limpiador de BaÃ±o', 'Limpiador especÃ­fico para baÃ±o', 2.50, 60, 3.50, 1, 6, 1),
+(1027, 'JabÃ³n de Manos', 'JabÃ³n lÃ­quido para manos', 1.00, 70, 1.50, 1, 7, 1),
 (1028, 'Verduras Frescas', 'Mezcla de verduras frescas', 1.50, 80, 2.00, 1, 1, 1),
 (1029, 'Filete de Res', 'Filete de res fresco', 5.00, 50, 8.00, 2, 3, 1),
 (1030, 'Bollos de Canela', 'Bollos con sabor a canela', 0.90, 90, 1.30, 1, 4, 1),
@@ -287,7 +287,7 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 (1036, 'Mantequilla', 'Mantequilla sin sal', 1.80, 100, 2.50, 1, 2, 1),
 (1037, 'Tocino', 'Tocino ahumado', 3.50, 50, 5.00, 2, 3, 1),
 (1038, 'Pan de Molde', 'Pan de molde suave', 1.00, 120, 1.50, 1, 4, 1),
-(1039, 'Té Frío', 'Té frío sabor durazno', 1.20, 90, 1.80, 1, 5, 1),
+(1039, 'TÃ© FrÃ­o', 'TÃ© frÃ­o sabor durazno', 1.20, 90, 1.80, 1, 5, 1),
 (1040, 'Esponja para Lavado', 'Esponja multiusos para lavar', 0.50, 80, 0.80, 1, 6, 1),
 (1041, 'Crema Hidratante', 'Crema hidratante para piel seca', 2.50, 60, 3.50, 1, 7, 1),
 (1042, 'Guisantes Congelados', 'Guisantes congelados', 1.00, 70, 1.50, 2, 8, 1),
@@ -296,20 +296,20 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 (1045, 'Pimientos', 'Pimientos frescos', 0.50, 130, 0.80, 1, 1, 1),
 (1046, 'Batido de Fresa', 'Batido de fresa natural', 1.50, 90, 2.00, 1, 5, 1),
 (1047, 'Mayonesa', 'Mayonesa cremosa', 1.00, 80, 1.50, 1, 9, 1),
-(1048, 'Tortillas de Maíz', 'Tortillas de maíz frescas', 1.50, 70, 2.00, 1, 8, 1),
+(1048, 'Tortillas de MaÃ­z', 'Tortillas de maÃ­z frescas', 1.50, 70, 2.00, 1, 8, 1),
 (1049, 'Gelatina', 'Gelatina de sabor frutal', 0.60, 120, 1.00, 1, 10, 1),
 (1050, 'Zanahorias', 'Zanahorias frescas y crujientes', 0.25, 130, 0.50, 1, 1, 1),
 (1051, 'Queso Mozzarella', 'Queso mozzarella fresco', 2.50, 90, 3.50, 1, 2, 1),
-(1052, 'Jamón Serrano', 'Jamón serrano de alta calidad', 4.50, 50, 6.50, 2, 3, 1),
+(1052, 'JamÃ³n Serrano', 'JamÃ³n serrano de alta calidad', 4.50, 50, 6.50, 2, 3, 1),
 (1053, 'Rosquillas', 'Rosquillas glaseadas', 0.90, 100, 1.40, 1, 4, 1),
-(1054, 'Refresco de Limón', 'Refresco de limón gaseoso', 1.00, 150, 1.50, 1, 5, 1),
+(1054, 'Refresco de LimÃ³n', 'Refresco de limÃ³n gaseoso', 1.00, 150, 1.50, 1, 5, 1),
 (1055, 'Desinfectante de Pisos', 'Desinfectante para pisos de alto rendimiento', 1.80, 70, 2.50, 1, 6, 1),
 (1056, 'Acondicionador', 'Acondicionador para cabello seco', 2.00, 60, 2.80, 1, 7, 1),
 (1057, 'Filetes de Merluza Congelada', 'Filetes de merluza congelada de alta calidad', 3.50, 60, 5.00, 2, 8, 1),
 (1058, 'Harina de Trigo', 'Harina de trigo refinada', 0.90, 120, 1.20, 1, 9, 1),
 (1059, 'Chicles de Menta', 'Chicles sabor menta', 0.50, 200, 0.80, 1, 10, 1),
-(1060, 'Espinacas Frescas', 'Espinacas frescas y orgánicas', 0.80, 110, 1.20, 1, 1, 1),
-(1061, 'Leche de Almendra', 'Leche de almendra sin azúcar', 1.50, 90, 2.20, 1, 2, 1),
+(1060, 'Espinacas Frescas', 'Espinacas frescas y orgÃ¡nicas', 0.80, 110, 1.20, 1, 1, 1),
+(1061, 'Leche de Almendra', 'Leche de almendra sin azÃºcar', 1.50, 90, 2.20, 1, 2, 1),
 (1062, 'Costillas de Cerdo', 'Costillas de cerdo marinadas', 5.00, 40, 7.50, 2, 3, 1),
 (1063, 'Pan de Viena', 'Pan de viena suave y esponjoso', 1.00, 100, 1.50, 1, 4, 1),
 (1064, 'Agua con Gas', 'Agua mineral con gas', 0.70, 140, 1.00, 1, 5, 1),
@@ -320,24 +320,24 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 (1069, 'Caramelos de Fresa', 'Caramelos masticables de fresa', 0.80, 150, 1.20, 1, 10, 1),
 (1070, 'Pepinos', 'Pepinos frescos y crujientes', 0.30, 120, 0.60, 1, 1, 1),
 (1071, 'Manteca', 'Manteca vegetal', 1.80, 80, 2.40, 1, 2, 1),
-(1072, 'Chuletón de Res', 'Chuletón de res de alta calidad', 6.00, 30, 8.50, 2, 3, 1),
+(1072, 'ChuletÃ³n de Res', 'ChuletÃ³n de res de alta calidad', 6.00, 30, 8.50, 2, 3, 1),
 (1073, 'Bizcochos', 'Bizcochos caseros', 0.80, 120, 1.30, 1, 4, 1),
 (1074, 'Cerveza Negra', 'Cerveza negra artesanal', 1.80, 80, 2.60, 1, 5, 1),
 (1075, 'Limpiador de Vidrios', 'Limpiador de vidrios sin marcas', 1.50, 90, 2.10, 1, 6, 1),
 (1076, 'Cuchillas de Afeitar', 'Cuchillas de afeitar desechables', 1.20, 70, 1.80, 1, 7, 1),
 (1077, 'Pizza Congelada', 'Pizza congelada lista para hornear', 3.50, 60, 5.00, 2, 8, 1),
-(1078, 'Café Molido', 'Café molido de alta calidad', 2.50, 100, 3.50, 1, 9, 1),
+(1078, 'CafÃ© Molido', 'CafÃ© molido de alta calidad', 2.50, 100, 3.50, 1, 9, 1),
 (1079, 'Patatas Fritas', 'Patatas fritas crujientes', 1.00, 150, 1.50, 1, 10, 1),
 (1080, 'Lechuga', 'Lechuga fresca y crujiente', 0.50, 110, 0.80, 1, 1, 1),
 (1081, 'Queso Parmesano', 'Queso parmesano rallado', 2.80, 90, 4.00, 1, 2, 1),
-(1082, 'Chorizo Ibérico', 'Chorizo ibérico de bellota', 4.50, 60, 6.50, 2, 3, 1),
-(1083, 'Pan Rústico', 'Pan rústico con masa madre', 1.20, 80, 1.80, 1, 4, 1),
+(1082, 'Chorizo IbÃ©rico', 'Chorizo ibÃ©rico de bellota', 4.50, 60, 6.50, 2, 3, 1),
+(1083, 'Pan RÃºstico', 'Pan rÃºstico con masa madre', 1.20, 80, 1.80, 1, 4, 1),
 (1084, 'Batido de Chocolate', 'Batido de chocolate cremoso', 1.50, 90, 2.20, 1, 5, 1),
 (1085, 'Desengrasante', 'Desengrasante potente para cocina', 1.70, 70, 2.50, 1, 6, 1),
-(1086, 'Loción Corporal', 'Loción hidratante para el cuerpo', 2.00, 60, 3.00, 1, 7, 1),
-(1087, 'Patatas Congeladas', 'Patatas congeladas para freír', 2.00, 70, 3.00, 2, 8, 1),
-(1088, 'Azúcar Morena', 'Azúcar morena de caña', 1.00, 100, 1.50, 1, 9, 1),
-(1089, 'Barritas de Cereal', 'Barritas energéticas de avena y miel', 1.20, 130, 1.80, 1, 10, 1);
+(1086, 'LociÃ³n Corporal', 'LociÃ³n hidratante para el cuerpo', 2.00, 60, 3.00, 1, 7, 1),
+(1087, 'Patatas Congeladas', 'Patatas congeladas para freÃ­r', 2.00, 70, 3.00, 2, 8, 1),
+(1088, 'AzÃºcar Morena', 'AzÃºcar morena de caÃ±a', 1.00, 100, 1.50, 1, 9, 1),
+(1089, 'Barritas de Cereal', 'Barritas energÃ©ticas de avena y miel', 1.20, 130, 1.80, 1, 10, 1);
 
 
 
@@ -345,24 +345,24 @@ INSERT INTO Producto (codigo_producto, nombre, descripcion, precio_compra, stock
 
 INSERT INTO Pago (total, id_metodo) VALUES (250.50, 1); -- Efectivo
 INSERT INTO Pago (total, id_metodo) VALUES (320.75, 2); -- Transferencia
-INSERT INTO Pago (total, id_metodo) VALUES (150.00, 3); -- Débito
-INSERT INTO Pago (total, id_metodo) VALUES (520.90, 4); -- Tarjeta de crédito
+INSERT INTO Pago (total, id_metodo) VALUES (150.00, 3); -- DÃ©bito
+INSERT INTO Pago (total, id_metodo) VALUES (520.90, 4); -- Tarjeta de crÃ©dito
 INSERT INTO Pago (total, id_metodo) VALUES (100.25, 1); -- Efectivo
 INSERT INTO Pago (total, id_metodo) VALUES (780.40, 2); -- Transferencia
-INSERT INTO Pago (total, id_metodo) VALUES (340.20, 3); -- Débito
-INSERT INTO Pago (total, id_metodo) VALUES (230.30, 4); -- Tarjeta de crédito
+INSERT INTO Pago (total, id_metodo) VALUES (340.20, 3); -- DÃ©bito
+INSERT INTO Pago (total, id_metodo) VALUES (230.30, 4); -- Tarjeta de crÃ©dito
 INSERT INTO Pago (total, id_metodo) VALUES (65.90, 1);  -- Efectivo
 INSERT INTO Pago (total, id_metodo) VALUES (480.99, 2); -- Transferencia
-INSERT INTO Pago (total, id_metodo) VALUES (299.99, 3); -- Débito
-INSERT INTO Pago (total, id_metodo) VALUES (999.99, 4); -- Tarjeta de crédito
+INSERT INTO Pago (total, id_metodo) VALUES (299.99, 3); -- DÃ©bito
+INSERT INTO Pago (total, id_metodo) VALUES (999.99, 4); -- Tarjeta de crÃ©dito
 INSERT INTO Pago (total, id_metodo) VALUES (120.10, 1); -- Efectivo
 INSERT INTO Pago (total, id_metodo) VALUES (199.80, 2); -- Transferencia
-INSERT INTO Pago (total, id_metodo) VALUES (80.15, 3);  -- Débito
-INSERT INTO Pago (total, id_metodo) VALUES (320.99, 4); -- Tarjeta de crédito
+INSERT INTO Pago (total, id_metodo) VALUES (80.15, 3);  -- DÃ©bito
+INSERT INTO Pago (total, id_metodo) VALUES (320.99, 4); -- Tarjeta de crÃ©dito
 INSERT INTO Pago (total, id_metodo) VALUES (140.50, 1); -- Efectivo
 INSERT INTO Pago (total, id_metodo) VALUES (645.00, 2); -- Transferencia
-INSERT INTO Pago (total, id_metodo) VALUES (270.75, 3); -- Débito
-INSERT INTO Pago (total, id_metodo) VALUES (390.60, 4); -- Tarjeta de crédito
+INSERT INTO Pago (total, id_metodo) VALUES (270.75, 3); -- DÃ©bito
+INSERT INTO Pago (total, id_metodo) VALUES (390.60, 4); -- Tarjeta de crÃ©dito
 
 
 ---- VENTAS
@@ -395,8 +395,6 @@ SELECT * FROM Venta
 ----- DETALLE_ VENTA
 
 INSERT INTO Producto_Venta (cod_venta, id_producto, cantidad) VALUES 
-(21, 1001, 3),
-(21, 1002, 2),
 (2, 1003, 1),
 (2, 1004, 4),
 (3, 1005, 2),
@@ -441,7 +439,6 @@ INSERT INTO Producto_Venta (cod_venta, id_producto, cantidad) VALUES
 
 INSERT INTO Factura (cod_venta, id_negocio)
 VALUES 
-(21, 1),
 (2, 1),
 (3, 1),
 (4, 1),
@@ -471,12 +468,12 @@ INSERT INTO Producto_Compra (cantidad, id_compra, id_producto) VALUES
 (1, 1, 1003),  -- 1 Pechuga de Pollo en la compra 1
 (5, 2, 1004),  -- 5 Pan Integral en la compra 2
 (1, 2, 1005),  -- 1 Jugo de Naranja en la compra 2
-(2, 2, 1006),  -- 2 Detergente Líquido en la compra 2
-(1, 3, 1007),  -- 1 Champú en la compra 3
+(2, 2, 1006),  -- 2 Detergente LÃ­quido en la compra 2
+(1, 3, 1007),  -- 1 ChampÃº en la compra 3
 (4, 3, 1008),  -- 4 Pescado Congelado en la compra 3
 (3, 3, 1009),  -- 3 Arroz Blanco en la compra 3
 (2, 4, 1010),  -- 2 Chocolate con Almendras en la compra 4
-(1, 4, 1011),  -- 1 Plátano en la compra 4
+(1, 4, 1011),  -- 1 PlÃ¡tano en la compra 4
 (3, 5, 1012),  -- 3 Yogur Natural en la compra 5
 (2, 5, 1013),  -- 2 Chorizos en la compra 5
 (4, 6, 1014),  -- 4 Croissants en la compra 6
@@ -491,8 +488,8 @@ INSERT INTO Producto_Compra (cantidad, id_compra, id_producto) VALUES
 (1, 10, 1023), -- 1 Salchicha en la compra 10
 (4, 11, 1024), -- 4 Pan de Ajo en la compra 11
 (2, 11, 1025), -- 2 Agua Mineral en la compra 11
-(3, 12, 1026), -- 3 Limpiador de Baño en la compra 12
-(1, 12, 1027), -- 1 Jabón de Manos en la compra 12
+(3, 12, 1026), -- 3 Limpiador de BaÃ±o en la compra 12
+(1, 12, 1027), -- 1 JabÃ³n de Manos en la compra 12
 (2, 13, 1028), -- 2 Verduras Frescas en la compra 13
 (5, 13, 1029), -- 5 Filetes de Res en la compra 13
 (1, 14, 1030), -- 1 Bollos de Canela en la compra 14
@@ -504,7 +501,7 @@ INSERT INTO Producto_Compra (cantidad, id_compra, id_producto) VALUES
 (3, 17, 1036), -- 3 Mantequillas en la compra 17
 (1, 17, 1037), -- 1 Tocino en la compra 17
 (5, 18, 1038), -- 5 Panes de Molde en la compra 18
-(2, 18, 1039), -- 2 Té Frío en la compra 18
+(2, 18, 1039), -- 2 TÃ© FrÃ­o en la compra 18
 (3, 19, 1040), -- 3 Esponjas para Lavado en la compra 19
 (1, 19, 1041), -- 1 Crema Hidratante en la compra 19
 (2, 20, 1042), -- 2 Guisantes Congelados en la compra 20
@@ -516,7 +513,6 @@ INSERT INTO Producto_Compra (cantidad, id_compra, id_producto) VALUES
 ----- TICKETS
 
 INSERT INTO Ticket (cod_venta) VALUES
-(21),
 (2),
 (3),
 (4),
