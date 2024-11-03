@@ -48,7 +48,6 @@ El objetivo general de este proyecto es desarrollar una base de datos relacional
 
 Este trabajo abarca el diseño, implementación y documentación de una base de datos relacional que permitirá gestionar de manera eficiente las operaciones de ventas y compras de productos. El sistema está diseñado para ser utilizado por usuarios con diferentes roles (administradores, vendedores, supervisor), cada uno con accesos y funcionalidades específicas. La solución proporcionará una interfaz centralizada para gestionar clientes, proveedores, productos, inventarios, métodos de pago y facturación, cubriendo todos los aspectos críticos de la operación de un negocio dedicado a la venta de productos.
 
-
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
 La realización de un sistema de gestión implica considerar diversos aspectos que son fundamentales para su efectividad y utilidad. Al ser un sistema genérico, es probable que incluya funciones que, aunque consideradas relevantes por el grupo de desarrolladores, no resulten efectivas o necesarias para ciertos potenciales clientes. Esta variabilidad en las necesidades de los usuarios subraya la importancia de un diseño flexible y adaptable que se ajuste a las particularidades de cada negocio.
@@ -68,6 +67,9 @@ Además, la implementación de mecanismos de respaldo y restauración (backup y 
 Por último, un sistema de gestión de base de datos bien diseñado también debe considerar la escalabilidad y la adaptabilidad a futuro. A medida que el negocio crece y evoluciona, la base de datos debe ser capaz de adaptarse a nuevos requerimientos y manejar mayores volúmenes de información sin comprometer el rendimiento. Esto implica la necesidad de una planificación cuidadosa en la fase de diseño y la elección de tecnologías que permitan integrar nuevas funcionalidades con facilidad.
 
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
+
+![creacion de usuarios](https://github.com/user-attachments/assets/98ccf5a9-eb17-45e7-a03c-fd4f85c88d11)
+
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
