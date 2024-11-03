@@ -153,6 +153,13 @@ BEGIN
 	SET @Mensaje = 'Categoría creada exitosamente.'
 END
 
+Luego se han concedido permisos de ejecución del procedimiento para ambos usuarios anteriormente creados:
+
+GRANT EXECUTE ON SP_REGISTROCATEGORIA TO AdminRol;
+GRANT EXECUTE ON SP_REGISTROCATEGORIA TO ReadOnlyRol;
+
+El usuario con permisos de administrador deberá poder insertar datos, mientras que el usuario de sólo lectura no debería poder hacerlo a menos que se le otorguen permisos específicos. Sin embargo, tomando en consideración las restricciones creadas antes sobre la tabla de categoría, se produzca un error debido a la falta de permisos para el usuario de lectura.
+
 ![procedimiento](https://github.com/user-attachments/assets/a18f203d-004f-453a-944f-a5afb9f039fe)
 
 Sin embargo, si intentamos realizar un INSERT a la tabla con el usuario read_user, se mostrará un mensaje de error indicando que no se tienen permisos para agregar datos a la tabla, debido a las restricciones previamente definidas para dicho usuario. El usuario efectivamente puede realizar un SELECT, pero no podrá realizar un DELETE, INSERT, o UPDATE, ya que, por defecto, cuando se crea un usuario de base de datos, el único permiso asignado es la instrucción SELECT.
