@@ -60,6 +60,107 @@ En el contexto de la realización de un sistema motor de base de datos, es esenc
 
 Otra consideración clave es el manejo de permisos a nivel de usuarios de base de datos. Implementar un sistema de gestión de accesos es fundamental para asegurar que solo el personal autorizado pueda acceder y manipular información sensible. Esto no solo protege los datos críticos de la empresa, sino que también contribuye a la creación de un entorno de trabajo más seguro y confiable, donde se minimizan los riesgos de fraudes o errores por parte de usuarios no autorizados.
 
+El manejo de permisos a nivel de usuarios en bases de datos es crucial para garantizar la seguridad y la integridad de la información. Los sistemas de gestión de bases de datos como SQL Server permiten definir roles y permisos que regulan el acceso a los datos y las operaciones que los usuarios pueden realizar. Esto incluye la posibilidad de establecer permisos específicos para diferentes roles, lo que facilita la adaptación de la seguridad a las necesidades cambiantes del negocio.
+
+En SQL Server, la administración de permisos se realiza a nivel de servidor mediante inicios de sesión y roles de servidor, y a nivel de base de datos a través de usuarios de base de datos y roles de base de datos. Se admiten inicios de sesión basados en autenticación de Windows y autenticación de SQL Server. Los inicios de sesión conceden acceso a una base de datos mediante la creación de un usuario de base de datos en una base de datos y la asignación de ese usuario de base de datos para iniciar sesión.  Existen dos tipos de roles de base de datos: los fijos y los definidos por el usuario. Los roles fijos de base de datos son un conjunto de roles preconfigurados que proporcionan un práctico grupo de permisos de nivel de base de datos. Por otro lado, los roles definidos por el usuario son aquellos que pueden ser creados por los usuarios con el permiso CREATE ROLE, permitiendo la representación de grupos de usuarios con permisos comunes. Normalmente, los permisos se conceden o deniegan a todo el rol, lo que simplifica la administración y supervisión de permisos.
+
+Para este caso en particular se han creado roles específicos y luego creado los usuarios:
+-- Paso 1: Creación de roles
+
+CREATE ROLE AdminRol;
+CREATE ROLE ReadOnlyRol;
+
+GRANT ALTER, CONTROL, DELETE, INSERT, SELECT, UPDATE TO AdminRol;
+GRANT SELECT TO ReadOnlyRol;
+
+-- Paso 2: Creación de los usuarios
+
+CREATE LOGIN admin_user WITH PASSWORD = 'AdminPassword123';
+CREATE USER admin_user FOR LOGIN admin_user;
+
+CREATE LOGIN read_user WITH PASSWORD = 'ReadPassword123';
+CREATE USER read_user FOR LOGIN read_user;
+
+![creacion de usuarios](https://github.com/user-attachments/assets/9d3d31aa-4741-4095-b6d6-a89b9df799fd)
+
+-- Paso 3: Asignación de permisos de solo lectura para algunas tablas para el rol ReadOnlyRol
+-- Permisos de lectura para la tabla Categoria
+GRANT SELECT ON Categoria TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Rol
+GRANT SELECT ON Rol TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Negocio
+GRANT SELECT ON Negocio TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Metodo_Pago
+GRANT SELECT ON Metodo_Pago TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Estado
+GRANT SELECT ON Estado TO ReadOnlyRol;
+
+-- Paso 3: Asignación de roles a los usuarios
+
+-- Asignación de rol de administrador al usuario admin_user
+EXEC sp_addrolemember 'AdminRol', 'admin_user';
+
+-- Asignación de rol de solo lectura al usuario read_user
+EXEC sp_addrolemember 'ReadOnlyRol', 'read_user';
+
+Verificación de acciones de consultas de lectura y escritura (INSERT, UPDATE, DELETE) en las tablas de la base de datos utilizando el usuario admin_user:
+
+/*Select con usuario de admin_user*/
+SELECT * FROM Categoria;
+
+/*Insert*/
+INSERT INTO dbo.Categoria (nombre) VALUES ('Sopas instantaneas');
+
+![insert de admin](https://github.com/user-attachments/assets/8abf85f1-ed07-4dd2-89b6-c2fc4db9a1a6)
+
+/*Update*/
+UPDATE dbo.Categoria SET nombre = 'Sopas' WHERE id_categoria = 11;
+
+/*Delete*/
+DELETE FROM dbo.Categoria WHERE id_categoria = 11;
+
+Las diferentes acciones con dicho usuario creado no se verifican restricciones ni errores existentes al realizar diversas acciones en cualquier tabla de la base de datos. Al igual que al momento de ejecutar un procedimiento almacenado para una de las tablas, se puede crear el mismo como así también realizar diferentes inserciones, para la prueba de dicho procedimiento almacenado.
+
+/* REGISTRO DE CATEGORIA */
+GO
+CREATE PROC SP_REGISTROCATEGORIA
+(
+@id_categoria int,
+@nombre varchar(50),
+@Respuesta int output,
+@Mensaje varchar(200) output
+)
+AS
+BEGIN
+	SET @Respuesta = 0
+	SET @Mensaje = ''
+
+	-- Para validar que no exista otra categoria con mismo nombre
+	IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
+	BEGIN
+        SET @Mensaje = 'Categoría ya existente.'
+        RETURN
+    END
+
+	INSERT INTO dbo.categoria (nombre) VALUES
+		(@nombre)
+
+	SET @Respuesta = SCOPE_IDENTITY(); -- Para realizar la carga del id con el ultimo generado
+	SET @Mensaje = 'Categoría creada exitosamente.'
+END
+
+![procedimiento](https://github.com/user-attachments/assets/a18f203d-004f-453a-944f-a5afb9f039fe)
+
+Sin embargo, si intentamos realizar un INSERT a la tabla con el usuario read_user, se mostrará un mensaje de error indicando que no se tienen permisos para agregar datos a la tabla, debido a las restricciones previamente definidas para dicho usuario. El usuario efectivamente puede realizar un SELECT, pero no podrá realizar un DELETE, INSERT, o UPDATE, ya que, por defecto, cuando se crea un usuario de base de datos, el único permiso asignado es la instrucción SELECT.
+
+![permiso denegado](https://github.com/user-attachments/assets/009deb1a-14ee-4ce3-ae6d-d9fc32bbc2a4)
+
+La gestión adecuada de permisos y roles en SQL Server es crucial para garantizar la seguridad y el control de acceso a los datos. Utilizando roles fijos y definidos por el usuario, se puede simplificar la administración de permisos, asegurando que cada usuario tenga el nivel adecuado de acceso a la información según sus necesidades y responsabilidades.
+
 La optimización de consultas a través de índices es otra característica vital en un sistema de gestión de base de datos. Los índices permiten acelerar las búsquedas y el acceso a datos específicos, mejorando considerablemente el rendimiento del sistema. Esto es particularmente importante en negocios que manejan grandes volúmenes de información, donde el tiempo de respuesta puede afectar directamente la satisfacción del cliente y la eficiencia operativa.
 
 Además, la implementación de mecanismos de respaldo y restauración (backup y restore) es crucial para garantizar la protección de la información ante posibles pérdidas. Los sistemas de gestión de base de datos deben incluir procedimientos robustos que permitan realizar copias de seguridad periódicas de toda la información almacenada, así como la posibilidad de restaurar rápidamente los datos en caso de fallos técnicos, pérdidas de datos o ataques cibernéticos. Esta capacidad de recuperación no solo asegura la continuidad del negocio, sino que también proporciona tranquilidad a los gestores, sabiendo que la información crítica está protegida y puede ser recuperada cuando sea necesario.
@@ -67,9 +168,6 @@ Además, la implementación de mecanismos de respaldo y restauración (backup y 
 Por último, un sistema de gestión de base de datos bien diseñado también debe considerar la escalabilidad y la adaptabilidad a futuro. A medida que el negocio crece y evoluciona, la base de datos debe ser capaz de adaptarse a nuevos requerimientos y manejar mayores volúmenes de información sin comprometer el rendimiento. Esto implica la necesidad de una planificación cuidadosa en la fase de diseño y la elección de tecnologías que permitan integrar nuevas funcionalidades con facilidad.
 
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
-
-![creacion de usuarios](https://github.com/user-attachments/assets/98ccf5a9-eb17-45e7-a03c-fd4f85c88d11)
-
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
@@ -104,5 +202,7 @@ Nunc sollicitudin purus quis ante sodales luctus. Proin a scelerisque libero, vi
 
 ## BIBLIOGRAFÍA DE CONSULTA
 
+Microsoft. (n.d.). Getting started with database engine permissions. Recuperado de https://learn.microsoft.com/es-es/sql/relational-databases/security/authentication-access/getting-started-with-database-engine-permissions?view=sql-server-ver16
 
+IBM. (n.d.). Monitoring and creating users, granting permissions. Recuperado de https://www.ibm.com/docs/es/capm?topic=monitoring-creating-user-granting-permissions
 
