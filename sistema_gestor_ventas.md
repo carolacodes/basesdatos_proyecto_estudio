@@ -218,9 +218,12 @@ En un índice no agrupado, los nodos hoja no contienen las páginas de datos rea
 ### ¿Qué es el plan de ejecución estimado?
 El plan de ejecución estimado es un análisis previo que SQL Server hace para decidir cómo responderá a una consulta, evaluando las diferentes formas de acceder a los datos y calculando cuál es la más eficiente. SQL Server toma en cuenta factores como índices, estadísticas y el diseño de la consulta para elegir la estrategia óptima.
 
+## TEMA 4: Backup y restore
+
 Además, la implementación de mecanismos de respaldo y restauración (backup y restore) es crucial para garantizar la protección de la información ante posibles pérdidas. Los sistemas de gestión de base de datos deben incluir procedimientos robustos que permitan realizar copias de seguridad periódicas de toda la información almacenada, así como la posibilidad de restaurar rápidamente los datos en caso de fallos técnicos, pérdidas de datos o ataques cibernéticos. Esta capacidad de recuperación no solo asegura la continuidad del negocio, sino que también proporciona tranquilidad a los gestores, sabiendo que la información crítica está protegida y puede ser recuperada cuando sea necesario.
 
 El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
+
 
 ### ¿Qué es un Backup?
 El backup es una copia de datos que se almacena para restaurar y recuperar información en caso de una falla. Los respaldos de bases de datos permiten recuperar el estado exacto de la información en una fecha y hora específica, o incluso en un punto exacto en el tiempo.
@@ -599,7 +602,7 @@ select * from Proveedor
 ![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
 
 
-> Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/Backup.sql)
+> Acceder a la siguiente carpeta para leer el script [scripts-> tema_4](script/Backup.sql)
 
 
 ### Diagrama relacional
