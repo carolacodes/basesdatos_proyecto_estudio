@@ -376,6 +376,161 @@ WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
 ![Costo ejecucion ambas con indice](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/costoEjecucionAmbas_3.png)
 
 
+### TEMA: BACKUP Y RESTORE
+El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
+
+¿Qué es un Backup?
+El backup es una copia de datos que se almacena para restaurar y recuperar información en caso de una falla. Los respaldos de bases de datos permiten recuperar el estado exacto de la información en una fecha y hora específica, o incluso en un punto exacto en el tiempo.
+
+Tipos de Backup
+    * Copia de seguridad completa: Representa la base de datos en su totalidad en el momento de finalización del respaldo. Es fundamental como base para otros tipos de backup, ya que contiene todos los datos de la base en un punto dado.
+    * Copia de seguridad diferencial: Contiene únicamente los cambios realizados desde la última copia de seguridad completa. Es una opción eficiente para reducir el tiempo y el espacio requerido en el almacenamiento.
+    * Log backup: Se enfoca en almacenar las transacciones realizadas desde el último respaldo completo o diferencial. Este tipo de backup permite una recuperación precisa hasta un punto específico en el tiempo y es ideal para minimizar la pérdida de datos recientes.
+
+Backup en Línea
+El backup en línea es una técnica de respaldo que permite realizar una copia de seguridad mientras la base de datos está activa. Esto es crucial para sistemas que necesitan alta disponibilidad, ya que permite realizar respaldos sin interrumpir las operaciones.
+Requisitos para el Backup en Línea
+Para implementar un backup en línea, generalmente es necesario que la base de datos esté en un modo de recuperación completo o similar. Este modo registra todas las transacciones, permitiendo que los cambios puedan aplicarse de manera ordenada y consistente en caso de restauración.
+Ventajas del Backup en Línea
+    * Alta disponibilidad: Permite realizar respaldos sin necesidad de detener la base de datos, lo que evita interrupciones en las operaciones.
+    * Recuperación a puntos específicos: Gracias a los logs, es posible restaurar la base de datos en un punto de tiempo específico.
+    * Ideal para entornos críticos: Es una opción idónea para sistemas que requieren disponibilidad continua, como aquellos con operaciones 24/7.
+
+¿Qué es el Restore?
+Restore es el proceso de devolver una base de datos a un estado anterior utilizando una copia de respaldo. Es esencial para el mantenimiento de la integridad de los datos, ya que permite recuperar la información en caso de corrupción, errores o fallos del sistema.
+Tipos de Restauración
+    * Restauración completa: Usa un backup completo para devolver la base de datos al estado exacto en que estaba en el momento del respaldo.
+    * Restauración diferencial: Aplica una copia de seguridad diferencial sobre un respaldo completo para actualizar la base de datos al estado más reciente sin aplicar cada cambio individual.
+    * Restauración de logs de transacciones: Permite aplicar logs de transacciones para actualizar la base de datos a un punto específico entre el último respaldo completo y el momento deseado. Este tipo de restauración es clave para la recuperación de datos recientes.
+
+Tareas:
+•	Verificar que el modelo de recuperación de la base de datos esté en el modo adecuado para realizar backup en línea.
+
+--- Configurar el modelo de recuperación en FULL
+-- Cambia el modelo de recuperación de la base de datos a FULL para habilitar la realización de backups de logs de transacciones
+ALTER DATABASE sistema_gestor_de_ventas
+SET RECOVERY FULL;
+
+-- Selecciona el nombre y el modelo de recuperación de la base de datos 'sistema_gestor_de_ventas'
+SELECT name, recovery_model_desc
+FROM sys.databases
+WHERE name = 'sistema_gestor_de_ventas';
+
+![modelo_de_recuperacion](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/modelo_de_recuperacion.png)
+
+•	Realizar un backup full de la base de datos.
+
+BACKUP DATABASE sistema_gestor_de_ventas
+TO DISK = 'C:\backups\sistema_gestor_de_ventas_full.bak.'
+WITH FORMAT, INIT;
+
+•	Generar 10 inserts sobre una tabla de referencia.
+
+-- Proveedores antes del insert
+![proveedores_full_Backup](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_Full_Backup.png)
+
+•	Generar 10 inserts sobre una tabla de referencia.
+
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor D', 'Calle nueva 234', 3764265874, 'proveedorD@gmail.com', 'www.proveedord.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor E', 'Calle nueva 345', 3764265871, 'proveedorE@gmail.com', 'www.proveedore.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor F', 'Calle nueva 456', 3764265872, 'proveedorF@gmail.com', 'www.proveedorf.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor G', 'Calle nueva 567', 3764265873, 'proveedorG@gmail.com', 'www.proveedorg.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor H', 'Calle nueva 678', 3764265804, 'proveedorH@gmail.com', 'www.proveedorh.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor I', 'Calle nueva 789', 3764265875, 'proveedorI@gmail.com', 'www.proveedori.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor J', 'Calle nueva 891', 3764265876, 'proveedorJ@gmail.com', 'www.proveedorj.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor K', 'Calle nueva 912', 3764265877, 'proveedorK@gmail.com', 'www.proveedork.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor L', 'Calle nueva 123', 3764265878, 'proveedorL@gmail.com', 'www.proveedorl.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor M', 'Calle nueva 233', 3764265879, 'proveedorM@gmail.com', 'www.proveedorm.com',1)
+
+![proveedores_LOG](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG.png)
+
+•	Realizar backup del archivo de log y registrar la hora del backup
+--- Crea un backup del log de transacciones en el archivo especificado
+BACKUP LOG sistema_gestor_de_ventas
+TO DISK = 'C:\backups\sistema_gestor_de_ventas_log.bak.'
+WITH INIT;
+
+--- Almacena la hora del backup en una variable y la muestra
+DECLARE @HoraBackup DATETIME;
+SET @HoraBackup = GETDATE();
+PRINT 'Backup del archivo de log completado a las: ' + CONVERT(VARCHAR, @HoraBackup, 120);
+
+•	Generar otros 10 insert sobre la tabla de referencia.
+
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 1', 'Calle 234', 3795265874, 'proveedor1@gmail.com', 'www.proveedor1.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 2', 'Calle 345', 3795265871, 'proveedor2@gmail.com', 'www.proveedor2.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 3', 'Calle 456', 3795265872, 'proveedor3@gmail.com', 'www.proveedor3.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 4', 'Calle 567', 3795265873, 'proveedor4@gmail.com', 'www.proveedor4.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 5', 'Calle 678', 3795265804, 'proveedor5@gmail.com', 'www.proveedor5.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 6', 'Calle 789', 3795265875, 'proveedor6@gmail.com', 'www.proveedor6.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 7', 'Calle 891', 3795265876, 'proveedor7@gmail.com', 'www.proveedor7.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 8', 'Calle 912', 3795265877, 'proveedor8@gmail.com', 'www.proveedor8.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 9', 'Calle 123', 3795265878, 'proveedor9@gmail.com', 'www.proveedor9.com',1)
+insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 10', 'Calle 233',3795265879,'proveedor10@gmail.com','www.proveedor10.com',1)
+
+![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
+
+•	Realizar nuevamente backup de archivo de log  en otro archivo físico.
+
+BACKUP LOG sistema_gestor_de_ventas
+TO DISK = 'C:\backups\sistema_gestor_de_ventas_log2.bak.'
+WITH INIT;
+
+-- Registra y muestra la hora del segundo backup de log
+DECLARE @HoraBackup DATETIME;
+SET @HoraBackup = GETDATE();
+PRINT 'Backup del archivo de log completado a las: ' + CONVERT(VARCHAR, @HoraBackup, 120);
+
+•	Restaurar la base de datos al momento del primer backup del archivo de log. Es decir después de los primeros 10 insert.
+
+--- Restaurar la base de datos al estado después del primer backup del log
+-- Cambia el contexto a la base de datos 'master' antes de realizar la restauración
+USE master;
+
+-- Restaura el backup completo inicial de la base de datos sin recuperarla completamente, para aplicar logs adicionales
+RESTORE DATABASE sistema_gestor_de_ventas
+FROM DISK = 'C:\backups\sistema_gestor_de_ventas_full.bak.'
+WITH NORECOVERY, REPLACE;
+
+-- Restaura el primer backup de log para recuperar la base de datos hasta después de los primeros 10 inserts
+RESTORE LOG sistema_gestor_de_ventas
+FROM DISK = 'C:\backups\sistema_gestor_de_ventas_log.bak.'
+WITH RECOVERY;
+
+-- Cambia el contexto de nuevo a la base de datos 'sistema_gestor_de_ventas' y muestra el estado actual de la tabla
+USE sistema_gestor_de_ventas;
+select * from Proveedor
+
+![proveedores_LOG](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG.png)
+
+•	Restaurar la base de datos aplicando ambos archivos de log.
+
+--- Restaurar la base de datos aplicando ambos archivos de log
+-- Cambia el contexto a 'master' antes de iniciar otra restauración completa
+USE master;
+
+-- Restaura el backup completo nuevamente sin recuperación para aplicar ambos logs
+RESTORE DATABASE sistema_gestor_de_ventas
+FROM DISK = 'C:\backups\sistema_gestor_de_ventas_full.bak'
+WITH NORECOVERY, REPLACE;
+
+-- Aplica el primer log sin completar la recuperación
+RESTORE LOG sistema_gestor_de_ventas
+FROM DISK = 'C:\backups\sistema_gestor_de_ventas_log.bak'
+WITH NORECOVERY;
+
+-- Aplica el segundo log y completa la recuperación
+RESTORE LOG sistema_gestor_de_ventas
+FROM DISK = 'C:\backups\sistema_gestor_de_ventas_log2.bak'
+WITH RECOVERY;
+
+-- Cambia el contexto a la base de datos restaurada y muestra los datos actuales en la tabla 'Proveedor'
+USE sistema_gestor_de_ventas;
+select * from Proveedor
+
+![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
+
+
 
 ### Diagrama relacional
 ![diagrama_relacional](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/doc/Esquema_Relacion.jpeg)
