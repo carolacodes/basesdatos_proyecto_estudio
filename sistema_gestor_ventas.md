@@ -222,15 +222,15 @@ Además, la implementación de mecanismos de respaldo y restauración (backup y 
 
 El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
 
-¿Qué es un Backup?
+### ¿Qué es un Backup?
 El backup es una copia de datos que se almacena para restaurar y recuperar información en caso de una falla. Los respaldos de bases de datos permiten recuperar el estado exacto de la información en una fecha y hora específica, o incluso en un punto exacto en el tiempo.
 
-Tipos de Backup
+### Tipos de Backup
     * Copia de seguridad completa: Representa la base de datos en su totalidad en el momento de finalización del respaldo. Es fundamental como base para otros tipos de backup, ya que contiene todos los datos de la base en un punto dado.
     * Copia de seguridad diferencial: Contiene únicamente los cambios realizados desde la última copia de seguridad completa. Es una opción eficiente para reducir el tiempo y el espacio requerido en el almacenamiento.
     * Log backup: Se enfoca en almacenar las transacciones realizadas desde el último respaldo completo o diferencial. Este tipo de backup permite una recuperación precisa hasta un punto específico en el tiempo y es ideal para minimizar la pérdida de datos recientes.
 
-Backup en Línea
+### Backup en Línea
 El backup en línea es una técnica de respaldo que permite realizar una copia de seguridad mientras la base de datos está activa. Esto es crucial para sistemas que necesitan alta disponibilidad, ya que permite realizar respaldos sin interrumpir las operaciones.
 Requisitos para el Backup en Línea
 Para implementar un backup en línea, generalmente es necesario que la base de datos esté en un modo de recuperación completo o similar. Este modo registra todas las transacciones, permitiendo que los cambios puedan aplicarse de manera ordenada y consistente en caso de restauración.
@@ -239,7 +239,7 @@ Ventajas del Backup en Línea
     * Recuperación a puntos específicos: Gracias a los logs, es posible restaurar la base de datos en un punto de tiempo específico.
     * Ideal para entornos críticos: Es una opción idónea para sistemas que requieren disponibilidad continua, como aquellos con operaciones 24/7.
 
-¿Qué es el Restore?
+### ¿Qué es el Restore?
 Restore es el proceso de devolver una base de datos a un estado anterior utilizando una copia de respaldo. Es esencial para el mantenimiento de la integridad de los datos, ya que permite recuperar la información en caso de corrupción, errores o fallos del sistema.
 Tipos de Restauración
     * Restauración completa: Usa un backup completo para devolver la base de datos al estado exacto en que estaba en el momento del respaldo.
@@ -463,12 +463,7 @@ Aunque el plan de ejecución muestra un costo similar 48% vs. 52%, el "Index See
 
 > Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/indices.sql)
 
-<<<<<<< HEAD
 ### TEMA: BACKUP Y RESTORE
-=======
-## TEMA 4: BACKUP Y RESTORE
-El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
->>>>>>> fe87c2ce916793fd1ec2cb42bdea9668694569fe
 
 •	Verificar que el modelo de recuperación de la base de datos esté en el modo adecuado para realizar backup en línea.
 ```sql
@@ -603,6 +598,8 @@ select * from Proveedor
 ```
 ![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
 
+
+> Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/Backup.sql)
 
 
 ### Diagrama relacional
