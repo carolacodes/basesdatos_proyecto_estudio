@@ -172,9 +172,39 @@ La optimización de consultas a través de índices es otra característica vita
 
 Además, la implementación de mecanismos de respaldo y restauración (backup y restore) es crucial para garantizar la protección de la información ante posibles pérdidas. Los sistemas de gestión de base de datos deben incluir procedimientos robustos que permitan realizar copias de seguridad periódicas de toda la información almacenada, así como la posibilidad de restaurar rápidamente los datos en caso de fallos técnicos, pérdidas de datos o ataques cibernéticos. Esta capacidad de recuperación no solo asegura la continuidad del negocio, sino que también proporciona tranquilidad a los gestores, sabiendo que la información crítica está protegida y puede ser recuperada cuando sea necesario.
 
+El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
+
+¿Qué es un Backup?
+El backup es una copia de datos que se almacena para restaurar y recuperar información en caso de una falla. Los respaldos de bases de datos permiten recuperar el estado exacto de la información en una fecha y hora específica, o incluso en un punto exacto en el tiempo.
+
+Tipos de Backup
+    * Copia de seguridad completa: Representa la base de datos en su totalidad en el momento de finalización del respaldo. Es fundamental como base para otros tipos de backup, ya que contiene todos los datos de la base en un punto dado.
+    * Copia de seguridad diferencial: Contiene únicamente los cambios realizados desde la última copia de seguridad completa. Es una opción eficiente para reducir el tiempo y el espacio requerido en el almacenamiento.
+    * Log backup: Se enfoca en almacenar las transacciones realizadas desde el último respaldo completo o diferencial. Este tipo de backup permite una recuperación precisa hasta un punto específico en el tiempo y es ideal para minimizar la pérdida de datos recientes.
+
+Backup en Línea
+El backup en línea es una técnica de respaldo que permite realizar una copia de seguridad mientras la base de datos está activa. Esto es crucial para sistemas que necesitan alta disponibilidad, ya que permite realizar respaldos sin interrumpir las operaciones.
+Requisitos para el Backup en Línea
+Para implementar un backup en línea, generalmente es necesario que la base de datos esté en un modo de recuperación completo o similar. Este modo registra todas las transacciones, permitiendo que los cambios puedan aplicarse de manera ordenada y consistente en caso de restauración.
+Ventajas del Backup en Línea
+    * Alta disponibilidad: Permite realizar respaldos sin necesidad de detener la base de datos, lo que evita interrupciones en las operaciones.
+    * Recuperación a puntos específicos: Gracias a los logs, es posible restaurar la base de datos en un punto de tiempo específico.
+    * Ideal para entornos críticos: Es una opción idónea para sistemas que requieren disponibilidad continua, como aquellos con operaciones 24/7.
+
+¿Qué es el Restore?
+Restore es el proceso de devolver una base de datos a un estado anterior utilizando una copia de respaldo. Es esencial para el mantenimiento de la integridad de los datos, ya que permite recuperar la información en caso de corrupción, errores o fallos del sistema.
+Tipos de Restauración
+    * Restauración completa: Usa un backup completo para devolver la base de datos al estado exacto en que estaba en el momento del respaldo.
+    * Restauración diferencial: Aplica una copia de seguridad diferencial sobre un respaldo completo para actualizar la base de datos al estado más reciente sin aplicar cada cambio individual.
+    * Restauración de logs de transacciones: Permite aplicar logs de transacciones para actualizar la base de datos a un punto específico entre el último respaldo completo y el momento deseado. Este tipo de restauración es clave para la recuperación de datos recientes.
+
+
 Por último, un sistema de gestión de base de datos bien diseñado también debe considerar la escalabilidad y la adaptabilidad a futuro. A medida que el negocio crece y evoluciona, la base de datos debe ser capaz de adaptarse a nuevos requerimientos y manejar mayores volúmenes de información sin comprometer el rendimiento. Esto implica la necesidad de una planificación cuidadosa en la fase de diseño y la elección de tecnologías que permitan integrar nuevas funcionalidades con facilidad.
 
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
+
+
+
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
@@ -386,33 +416,7 @@ Aunque el plan de ejecución muestra un costo similar 48% vs. 52%, el "Index See
 > Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/indices.sql)
 
 ### TEMA: BACKUP Y RESTORE
-El backup y restore de bases de datos son procedimientos críticos para garantizar la disponibilidad y la integridad de los datos. Los respaldos permiten realizar copias de la información que pueden ser restauradas en caso de fallos, asegurando la continuidad operativa en sistemas que dependen de datos accesibles y seguros.
 
-¿Qué es un Backup?
-El backup es una copia de datos que se almacena para restaurar y recuperar información en caso de una falla. Los respaldos de bases de datos permiten recuperar el estado exacto de la información en una fecha y hora específica, o incluso en un punto exacto en el tiempo.
-
-Tipos de Backup
-    * Copia de seguridad completa: Representa la base de datos en su totalidad en el momento de finalización del respaldo. Es fundamental como base para otros tipos de backup, ya que contiene todos los datos de la base en un punto dado.
-    * Copia de seguridad diferencial: Contiene únicamente los cambios realizados desde la última copia de seguridad completa. Es una opción eficiente para reducir el tiempo y el espacio requerido en el almacenamiento.
-    * Log backup: Se enfoca en almacenar las transacciones realizadas desde el último respaldo completo o diferencial. Este tipo de backup permite una recuperación precisa hasta un punto específico en el tiempo y es ideal para minimizar la pérdida de datos recientes.
-
-Backup en Línea
-El backup en línea es una técnica de respaldo que permite realizar una copia de seguridad mientras la base de datos está activa. Esto es crucial para sistemas que necesitan alta disponibilidad, ya que permite realizar respaldos sin interrumpir las operaciones.
-Requisitos para el Backup en Línea
-Para implementar un backup en línea, generalmente es necesario que la base de datos esté en un modo de recuperación completo o similar. Este modo registra todas las transacciones, permitiendo que los cambios puedan aplicarse de manera ordenada y consistente en caso de restauración.
-Ventajas del Backup en Línea
-    * Alta disponibilidad: Permite realizar respaldos sin necesidad de detener la base de datos, lo que evita interrupciones en las operaciones.
-    * Recuperación a puntos específicos: Gracias a los logs, es posible restaurar la base de datos en un punto de tiempo específico.
-    * Ideal para entornos críticos: Es una opción idónea para sistemas que requieren disponibilidad continua, como aquellos con operaciones 24/7.
-
-¿Qué es el Restore?
-Restore es el proceso de devolver una base de datos a un estado anterior utilizando una copia de respaldo. Es esencial para el mantenimiento de la integridad de los datos, ya que permite recuperar la información en caso de corrupción, errores o fallos del sistema.
-Tipos de Restauración
-    * Restauración completa: Usa un backup completo para devolver la base de datos al estado exacto en que estaba en el momento del respaldo.
-    * Restauración diferencial: Aplica una copia de seguridad diferencial sobre un respaldo completo para actualizar la base de datos al estado más reciente sin aplicar cada cambio individual.
-    * Restauración de logs de transacciones: Permite aplicar logs de transacciones para actualizar la base de datos a un punto específico entre el último respaldo completo y el momento deseado. Este tipo de restauración es clave para la recuperación de datos recientes.
-
-Tareas:
 •	Verificar que el modelo de recuperación de la base de datos esté en el modo adecuado para realizar backup en línea.
 ```sql
 --- Configurar el modelo de recuperación en FULL
