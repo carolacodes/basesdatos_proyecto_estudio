@@ -192,6 +192,190 @@ Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luct
 Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris tortor nisl, ultricies ac scelerisque nec, feugiat in nibh. Pellentesque interdum aliquam magna sit amet rutrum. 
 
 
+### TEMA 3: Optimización de consultas a través de índices
+
+#### **PASO 1:** 
+Realizamos una insersion masiva de un millon de datos. Obtenemos de forma aleatoria los dni_usuario, dni_cliente, id_pago que ya tenemos insertados en la bases de datos. Se crea una fecha aleatoria en un rango de 10 años 
+
+```sql
+-- Eleccion de la Tabla Venta --
+
+-- declaramos variables 
+DECLARE @i INT = 0;
+DECLARE @total INT = 1000000;  -- Número total de registros a insertar
+
+-- generacion de registros
+WHILE @i < @total
+BEGIN
+    -- seleccionamos un DNI_usuario aleatorio de la tabla Usuario
+    DECLARE @DNI_usuario VARCHAR(200) = (SELECT TOP 1 DNI_usuario FROM Usuario ORDER BY NEWID());
+
+    -- seleccionamos un DNI_cliente aleatorio de la tabla Cliente
+    DECLARE @DNI_cliente VARCHAR(200) = (SELECT TOP 1 DNI_cliente FROM Cliente ORDER BY NEWID());
+
+    -- seleccionamos un id_pago aleatorio de la tabla Pago
+    DECLARE @id_pago INT = (SELECT TOP 1 id_pago FROM Pago ORDER BY NEWID());
+
+    -- verificamos si los valores obtenidos no son NULL
+    IF @DNI_usuario IS NOT NULL AND @DNI_cliente IS NOT NULL AND @id_pago IS NOT NULL
+    BEGIN
+        -- insertamos el registro en la tabla Venta
+        INSERT INTO Venta (fecha_venta, DNI_usuario, DNI_cliente, id_pago)
+        VALUES (
+            -- genera una fecha aleatoria en un rango de 10 años
+            DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 3650), '2010-01-01'),  
+            -- usa el DNI_usuario aleatorio de la tabla Usuario
+            @DNI_usuario,
+            -- usa el DNI_cliente aleatorio de la tabla Cliente
+            @DNI_cliente,
+            -- usa el id_pago aleatorio de la tabla Pago
+            @id_pago
+        );
+    END
+
+    SET @i = @i + 1;
+
+    -- cada 1000 registros se realiza un commit para mejorar el rendimiento 
+    IF @i % 1000 = 0
+    BEGIN
+        PRINT CONCAT('Inserted ', @i, ' records...');
+    END
+END;
+
+PRINT 'Carga masiva completada.';
+```
+#### **PASO 2: CREO UNA TABLA venta2 en base a la tabla Venta esta tabla nueva no contendrá indices y evaluo el plan de ejecucion y tiempo estimado**
+
+**Creo la tabla vebta 2**
+```sql
+SELECT * 
+INTO venta2
+FROM Venta --- 1000020 registros
+```
+
+**Realizo una consulta por periodo en la tabla sin indice (venta2)**
+```sql
+-- consulta por periodo tabla sin indice
+--TABLE SCAN
+SELECT *
+FROM venta2
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+### Plan ejecucion estimado table venta2 sin indices 
+![plan ejecucion tabale venta2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ejecucion_venta2_sin_indice_1.png)
+
+**Explicacion del resultado del plan de ejecucion estimado**
+
+En este caso el plan de ejecucion estimado que eligio el motor de bases de datos fue **"Table Scan"**, esto ocurre porque la tabla venta2 no tiene asociado ningun indice para poder acceder de forma mas rapidas a las consultas, el motor de base de datos debe recorrer todas las filas de la tabla para encontrar los registros con fechas entre año 2010 y el año 2018. Esta operación es muy poco eficiente para la cantidad de regitros que posee dicha tabla por lo que es conveniente crear un indice agrupado. 
+
+**Realizo consulta  una consulta por periodo en la tabla con indice (Venta)**
+```sql
+-- consulta por periodo tabla con indice
+--INDEX SCAN
+SELECT *
+FROM Venta
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+
+### Plan ejecucion estimado table Venta con indice 
+![plan ejecucion tabla Venta](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ejecucion_Venta_con_indice_1.png)
+
+**Explicacion del resultado del plan de ejecucion estimado**
+
+En este caso el plan de ejecucion estamado que eligio el motor de bases de datos fue **"Index Scan"** porque necesita revisar un rango amplio de fechas. Esto ocurre cuando el índice no está filtrando suficiente información para localizar rápidamente un subconjunto de filas. Es decir, el motor evalúa que debe revisar varias o todas las filas de un índice para encontrar las que cumplan los criterios de la consulta. De todos modos, ya que el indice de la tabla Venta es agrupado este ya contiene toda la informacion de la fila entonces el escaneo es más rápido y se evitan búsquedas adicionales.
+SQL Server recorrerá el índice desde la primera fecha que cumpla con la condición '2010-01-01' y continuará escaneando hasta llegar al final del rango '2018-12-31'.
+
+### AMBAS CONSULTAS Y SUS COSTO DE EJECUCION
+
+![Costo ejecucion ambas](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/costoEjecucionAmbas_1.png)
+
+#### **PASO 3: Creo un indice para la tabla venta2 y evaluo el plan de ejecucion y tiempo estimado**
+
+**Creo indice agrupado para tabla venta2**
+```sql
+-- defino indice agrupado para la columna fecha_venta
+-- tardo 00:00:05 en crear el indice ya que debe ordernar todos los 
+--registros en relacion al indice asociado a la columna fecha_venta
+CREATE CLUSTERED INDEX I_fecha_venta 
+ON venta2 (fecha_venta)
+```
+
+**Realizamos consulta sobre la tabla venta2 y evaluamos su plan de ejecucion**
+```sql
+--INDEX SEEK
+--tiempo de respuesta: 00:00:04
+SELECT *
+FROM venta2
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+
+### Plan ejecucion estimado table venta2 con indice 
+![plan ejecucion tabla venta2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/venta2_con_indice_2.png)
+
+**Explicacion del resultado del plan de ejecucion estimado**
+
+En este caso el plan de ejecucion que decide usar el motor de bases de datos es el **index seek** ya que este se usa cuando las consultas involucran un where o join que hacen uso de las columnas indexadas. Esto permite buscar de forma específica un rango o conjunto de valores, en lugar de revisar todas las entradas.
+
+**Realizamos consulta sobre la tabla Venta y evaluamos su plan de ejecucion**
+```sql
+--INDEX SCAN
+SELECT *
+FROM Venta
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+
+### Plan ejecucion estimado table Venta con indice 
+![plan ejecucion tabla venta2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ejecucion_Venta_con_indice_2.png)
+
+
+### AMBAS CONSULTAS Y SUS COSTO DE EJECUCION
+
+![Costo ejecucion ambas con indice](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/costoEjecucionAmbas_2.png)
+
+
+#### **PASO 4: Borramos el indice de la tabla venta2**
+```sql
+DROP INDEX I_fecha_venta ON venta2
+```
+#### **PASO 5: Creamos un indice sobre la columna fecha pero incluimos 2 columnas mas (cod_venta, dni_usuario)**
+```sql
+CREATE CLUSTERED INDEX I_fecha_venta
+ON venta2 (fecha_venta, cod_venta, DNI_usuario);
+```
+
+**Realizamos consulta sobre la tabla venta2 con indice agrupado**
+```sql
+--CONSULTA
+--tiempo de respuesta 00:00:03
+--INDEX SEEK
+--COSTO DE BUSQUEDA EN INDEX SEEK 100%
+SELECT cod_venta, DNI_usuario
+FROM venta2
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+
+### Plan ejecucion estimado table venta2 con indice 
+![plan ejecucion tabla venta2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/venta2_indice_agregado_3.png)
+
+**Realizamos consulta sobre la tabla Venta con indice agrupado**
+```sql
+--tiempo de respuesta 00:00:04
+--INDEX SCAN
+--COSTO DE BUSQUEDA EN INDEX SCAN %100
+SELECT cod_venta, DNI_usuario
+FROM Venta
+WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
+```
+
+### Plan ejecucion estimado table venta2 con indice 
+![plan ejecucion tabla Venta](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/VentaCosto_3.png)
+
+
+### AMBAS CONSULTAS Y SUS COSTO DE EJECUCION
+
+![Costo ejecucion ambas con indice](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/costoEjecucionAmbas_3.png)
+
+
 
 ### Diagrama relacional
 ![diagrama_relacional](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/doc/Esquema_Relacion.jpeg)
