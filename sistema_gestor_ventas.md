@@ -436,6 +436,7 @@ WITH FORMAT, INIT;
 •	Generar 10 inserts sobre una tabla de referencia.
 
 -- Proveedores antes del insert
+
 ![proveedores_full_Backup](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_Full_Backup.png)
 
 •	Generar 10 inserts sobre una tabla de referencia.
