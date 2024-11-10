@@ -168,6 +168,109 @@ Sin embargo, si intentamos realizar un INSERT a la tabla con el usuario read_use
 
 La gestión adecuada de permisos y roles en SQL Server es crucial para garantizar la seguridad y el control de acceso a los datos. Utilizando roles fijos y definidos por el usuario, se puede simplificar la administración de permisos, asegurando que cada usuario tenga el nivel adecuado de acceso a la información según sus necesidades y responsabilidades.
 
+## TEMA 2: PROCEDIMINETOS Y FUNCIONES ALMACENADAS (Bruno)
+
+### Procedimientos Almacenados en SQL Server
+Un procedimiento almacenado en SQL Server es un conjunto de instrucciones Transact-SQL o un método CLR (Common Language Runtime) de .NET que se almacena y ejecuta en el servidor. Los procedimientos pueden aceptar parámetros de entrada y devolver valores a través de parámetros de salida. También pueden realizar operaciones en la base de datos, como insertar, actualizar o eliminar datos, y devolver un valor de estado que indica si la operación fue exitosa o si hubo errores.
+ 
+### Ventajas de los Procedimientos Almacenados
+
+1.	Reducción del tráfico de red: Al ejecutar el código en el servidor, solo se envía una llamada a la base de datos, lo que disminuye el tráfico de red.
+
+2.	Mayor seguridad: Los procedimientos almacenados permiten ejecutar operaciones sin otorgar permisos directos sobre los objetos de la base de datos, mejorando la seguridad. Además, pueden proteger contra ataques de inyección de SQL.
+
+3.	Reutilización del código: Se reduce la duplicación de código, lo que facilita su mantenimiento y asegura consistencia.
+
+4.	Mantenimiento más sencillo: Los cambios en la lógica de la base de datos solo requieren modificaciones en los procedimientos, sin necesidad de actualizar las aplicaciones cliente.
+
+5.	Rendimiento mejorado: Los procedimientos se compilan la primera vez que se ejecutan, y su plan de ejecución puede ser reutilizado, mejorando el rendimiento en ejecuciones posteriores.
+
+### Tipos de Procedimientos Almacenados
+
+1.	Definidos por el Usuario: Son procedimientos creados por el usuario para realizar tareas específicas. Pueden ser escritos en Transact-SQL o como métodos CLR.
+
+2.	Temporales: Son procedimientos almacenados en la base de datos temporal tempdb. Pueden ser locales (visibles solo en la conexión actual) o globales (visibles para todos los usuarios hasta que termine la última sesión).
+
+3.	Del Sistema: Estos procedimientos son proporcionados por SQL Server para realizar tareas de administración y mantenimiento. Están disponibles en el esquema sys y no deben confundirse con los procedimientos definidos por el usuario.
+
+4.	Extendidos Definidos por el Usuario: Permiten crear rutinas externas en lenguajes como C. Estos procedimientos se almacenan como bibliotecas DLL que se cargan dinámicamente en el servidor. Este tipo de procedimiento ya no se encuentra en SQL SERVER.
+
+### Sintaxis básica para crear un procedimiento almacenado:
+
+![sintaxis procedimientos almacenados](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/sintaxsis-procedimientos.png)
+
+Ejemplo de nuestra base de datos:
+
+![ejemplo procedimientos almacenados](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/ejemplo-procediminetos.png)
+
+En este ejemplo, se puede observar un procedimiento almacenado encargado de dar de alta a un proveedor. Este procedimiento recibe parámetros, indicados con el símbolo @, que se utilizan como datos para crear el proveedor en la base de datos.
+
+## Funciones Almacenadas
+
+Una función es un conjunto de sentencias que operan como una unidad lógica.
+
+Una función tiene un nombre, retorna un valor de salida y, opcionalmente, puede aceptar parámetros de entrada. Las funciones de SQL Server no pueden modificarse, mientras que las funciones definidas por el usuario sí pueden serlo.
+
+SQL Server ofrece varios tipos de funciones para realizar distintas operaciones, que se pueden clasificar de la siguiente manera:
+
+1) Funciones de agregado:
+
+Estas funciones realizan operaciones que combinan varios valores y devuelven un único valor. Algunos ejemplos son:
+
+•	COUNT
+
+•	SUM
+
+•	MIN
+
+•	MAX
+
+2) Funciones escalares:
+
+Las funciones escalares toman un solo valor de entrada y retornan un único valor. Estas se pueden agrupar en las siguientes categorías:
+
+•	Funciones de configuración: Retornan información sobre la configuración del servidor.
+
+•	Funciones de cursores: Proporcionan información sobre el estado de un cursor.
+
+•	Funciones de fecha y hora: Operan con valores de tipo datetime y smalldatetime. Reciben un parámetro de tipo fecha y hora y retornan un valor de tipo cadena, numérico o de fecha y hora.
+
+•	Funciones matemáticas: Realizan operaciones numéricas, geométricas y trigonométricas.
+
+•	Funciones de metadatos: Proporcionan información sobre las bases de datos y los objetos en el sistema.
+
+•	Funciones de seguridad: Devuelven información relacionada con los usuarios y las funciones de seguridad.
+
+•	Funciones de cadena: Operan con valores de tipo char, varchar, nchar, nvarchar, binary y varbinary, y devuelven un valor de tipo cadena o numérico.
+
+•	Funciones del sistema: Proporcionan información sobre las opciones, objetos y configuraciones del sistema.
+
+•	Funciones estadísticas del sistema: Retornan información relacionada con el rendimiento del sistema.
+
+•	Funciones de texto e imagen: Realizan operaciones con valores de tipo text o image y retornan información relacionada con ellos.
+
+3) Funciones de conjuntos de filas:
+
+Estas funciones devuelven conjuntos de registros.
+
+Las funciones del sistema se pueden utilizar en cualquier lugar donde se permita una expresión dentro de una sentencia SELECT.
+
+Sintaxis de las funciones almacenadas
+
+![sintaxis funciones almacenadas](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/sintaxis-funciones.png)
+
+Ejemplo en nuestra base de datos de funciones
+
+![sintaxis funciones almacenadas](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/ejemplo-funciones.png)
+
+Básicamente para terminar podemos decir que los procedimientos almacenados en SQL son más fáciles de crear, mientras que las funciones tienen una estructura más rígida y admiten menos cláusulas y funcionalidades. Sin embargo, una ventaja de las funciones es que sus resultados se pueden usar fácilmente, como, por ejemplo, al concatenar una función con una cadena. En cambio, la manipulación de los resultados de un procedimiento almacenado es más compleja.
+
+En una función escalar, solo se puede devolver un valor, mientras que en un procedimiento almacenado se pueden devolver múltiples valores. No obstante, para utilizar las variables de salida en un procedimiento almacenado, es necesario declarar variables fuera del procedimiento y luego invocar el procedimiento.
+
+Además, no se pueden invocar procedimientos dentro de una función, pero en un procedimiento almacenado sí se pueden invocar tanto funciones como otros procedimientos almacenados.
+
+
+
 ## TEMA 3: OPTIMIZACIÓN DE CONSULTAS A TRAVÉS DE ÍNDICES: (carola)
 
 La optimización de consultas a través de índices es otra característica vital en un sistema de gestión de base de datos. Los índices permiten acelerar las búsquedas y el acceso a datos específicos, mejorando considerablemente el rendimiento del sistema. Esto es particularmente importante en negocios que manejan grandes volúmenes de información, donde el tiempo de respuesta puede afectar directamente la satisfacción del cliente y la eficiencia operativa.
@@ -272,6 +375,282 @@ Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luct
 
 Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris tortor nisl, ultricies ac scelerisque nec, feugiat in nibh. Pellentesque interdum aliquam magna sit amet rutrum. 
 
+## TEMA 2: Procediminetos y Funciones Almacenadas
+
+### Procediminetos Almacenados
+
+Primero realizamos procediminetos alamacenados para insertar un proveedor.
+
+```sql
+--Insercion de proveedor
+CREATE PROC dbo.SP_InsertarProveedor
+@nombre VARCHAR(200),
+@direccion VARCHAR(200),
+@telefono VARCHAR(200),
+@email VARCHAR(200),
+@web VARCHAR(200),
+@id_estado INT,
+@Mensaje VARCHAR(200) output
+AS
+BEGIN
+	SET @Mensaje= ''
+	-- Para validar que no exista otro proveedor con mismo nombre
+	IF EXISTS(SELECT * FROM dbo.Proveedor WHERE	nombre = @nombre)
+	BEGIN
+        SET @Mensaje = ' El provedor ya existe.'
+		PRINT @Mensaje
+        RETURN
+    END
+
+	-- Validamos si el estado proporcionado existe en la tabla Estado
+	IF NOT EXISTS(SELECT * FROM dbo.Estado WHERE id_estado = @id_estado)
+	BEGIN
+		SET @Mensaje = 'El estado ingresado no existe'
+		PRINT @Mensaje
+		RETURN
+	END
+
+
+	INSERT INTO dbo.Proveedor (nombre,direccion,telefono,email,web,id_estado) VALUES
+	 (@nombre,@direccion,@telefono,@email,@web,@id_estado)
+
+	 SET @Mensaje = 'Proveedor creado exitosamente'
+	 PRINT @Mensaje
+END
+```
+Luego ejecutamos el procedimiento con la siguiente linea de codigo
+
+```sql
+exec dbo.SP_InsertarProveedor 'HUEVO CAMPO','juju 1123441','37944351565432','hue23vo@gmail.com','huevosadcampo.com',0,''
+```
+![ensercion proveedor](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/insercion-proveedor.png)
+
+Como se puede apreciar en la imagen se agrego correctamente el proveedor
+
+Ahora hacemos un procedimiento para eliminar un proveedor a traves de si id
+
+```sql
+--ELIMINAR PROVEDOR 
+CREATE PROC SP_EliminarProveedor
+    @id_proveedor INT
+AS
+BEGIN
+    -- Declaramos una variable para verificar si el proveedor existe
+    DECLARE @Existente INT;
+
+    -- Verificamos si el proveedor existe
+    SELECT @Existente = COUNT(*) 
+    FROM Proveedor
+    WHERE id_proveedor = @id_proveedor;
+
+    IF @Existente = 0
+    BEGIN
+        PRINT 'El proveedor no existe';
+        RETURN; -- Salimos si el proveedor no existe
+    END
+
+    -- Primero, eliminamos los productos que pertenecen a este proveedor
+    DELETE FROM Producto
+    WHERE id_proveedor = @id_proveedor;
+
+    -- Luego, eliminamos el proveedor
+    DELETE FROM Proveedor
+    WHERE id_proveedor = @id_proveedor;
+
+    PRINT 'Proveedor y productos relacionados eliminados correctamente.';
+END;
+```
+```sql
+EXEC SP_EliminarProveedor @id_proveedor = 4;
+```
+![eliminacion proveedor](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/eliminacion-proveedor.png)
+
+Luego de ejecutarlo podemos apreciar que ya no existe en la base de datos
+
+Tambien hacemos un procedimiento para modificar un proveedor
+
+```sql
+--Modificar un proveedor
+CREATE PROCEDURE dbo.SP_ModificarProveedor
+    @id_proveedor int,            -- ID del proveedor a modificar
+    @nombre varchar(200),         -- Nuevo nombre
+    @direccion varchar(200),      -- Nueva dirección
+    @telefono varchar(200),       -- Nuevo teléfono
+    @email varchar(200),          -- Nuevo email
+    @web varchar(200),            -- Nueva web
+    @id_estado int,               -- Nuevo estado
+    @Mensaje varchar(200) output  -- Mensaje de salida
+as
+begin
+    -- Inicializamos el mensaje de salida
+    set @Mensaje = '';
+
+    -- Verificamos si el proveedor existe
+    if NOT EXISTS (select * from dbo.Proveedor where id_proveedor = @id_proveedor)
+    begin
+        -- Si no existe, retornamos un mensaje y terminamos el procedimiento
+        set @Mensaje = 'Proveedor no encontrado.';
+		print @Mensaje;
+        return;
+    end
+
+    -- Validamos si el estado proporcionado existe en la tabla Estado
+    if NOT EXISTS (select * from dbo.Estado where id_estado = @id_estado)
+    begin
+        -- Si el estado no existe, retornamos un mensaje y terminamos el procedimiento
+        set @Mensaje = 'El estado proporcionado no existe.';
+		print @Mensaje;
+        return;
+    end
+
+    --Se actualiza el proveedor
+    begin
+        update dbo.Proveedor
+        set
+            nombre = @nombre,
+            direccion = @direccion,
+            telefono = @telefono,
+            email = @email,
+            web = @web,
+            id_estado = @id_estado
+        where id_proveedor = @id_proveedor;
+
+        -- Asignamos el mensaje de éxito
+        set @Mensaje = 'Proveedor actualizado exitosamente.';
+		print @Mensaje;
+    end 
+    
+end;
+```
+![eliminacion proveedor](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/eliminacion-proveedor.png)
+
+```sql
+exec dbo.SP_ModificarProveedor 1,'UNNE','peru 567','37944351565432','unne@gmail.com','huevosadcampo.com',1,''
+```
+Con esos parametros procedemos a modificar al proveedor con el id_proveedor = 1
+
+![modificacion proveedor](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/modificacion-proveedor.png)
+
+### Funciones Almacenadas
+
+La siguiente funcion devuelve las edades de todos los usuarios de la base de datos
+
+```sql
+-- Creación de la función F_Calcular_Edad
+create function F_Calcular_Edad
+    -- Definición del parámetro de entrada: @fecha_nacimiento
+    (@fecha_nacimiento varchar(100))
+returns varchar(100)  -- La función devuelve un valor de tipo varchar
+as
+begin 
+    -- Declaración de la variable @edad para almacenar la edad calculada
+    declare @edad varchar(100)
+    
+    -- Asignación de un valor predeterminado a la variable @edad (en caso de error)
+    set @edad = 'Fecha de nacimiento inválida'
+    
+    -- Verificación de que el parámetro @fecha_nacimiento es una fecha válida
+    if (ISDATE(@fecha_nacimiento) = 1)
+    begin
+        -- Si la fecha es válida, se convierte @fecha_nacimiento a tipo datetime
+        set @fecha_nacimiento = cast(@fecha_nacimiento as datetime)
+        
+        -- Calcula la edad restando el año de nacimiento al año actual y asigna el resultado a @edad
+        set @edad = DATEDIFF(year, @fecha_nacimiento, GETDATE())
+    end -- termina el bloque del if
+    
+    -- Devuelve la edad calculada (o el mensaje de error si la fecha es inválida)
+    return @edad
+end;
+```
+La ejecutamos simplemente usando la sentencia select
+
+```sql
+--Correcto funcionamiento de la funcion
+select nombre, dbo.F_Calcular_Edad(fecha_nacimiento) as Edad from dbo.Usuario;
+```
+
+![edades usuarios](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/funcion-edad.png)
+
+
+Aqui podemos comprarla con una opracion directa que hace lo mismo 
+```sql
+-- Operacion directa para calcular la edad de los usuarios
+SELECT nombre, DATEDIFF(YEAR,fecha_nacimiento,GETDATE()) as Edad from dbo.Usuario
+```
+
+La siguiente funcion contabiliza cuantos usuarios estan activos y cuantos inactivos
+
+```sql
+--Funcion para contabilizar el numero de usuarios activo e inactivos
+CREATE FUNCTION dbo.F_UsuariosActivosInactivos()
+RETURNS VARCHAR(100)
+AS
+BEGIN
+    DECLARE @Activos INT, @Inactivos INT;
+
+    -- Obtener el número de usuarios activos
+    select @Activos = COUNT(*) FROM Usuario WHERE id_estado = 1;
+
+    -- Obtener el número de usuarios inactivos
+    select @Inactivos = COUNT(*) FROM Usuario WHERE id_estado = 0;
+
+    -- Devolver el resultado como una cadena de texto
+    return concat( 'Activos: ' , CAST(@Activos AS VARCHAR) , ' Inactivos: ' , CAST(@Inactivos AS VARCHAR));
+end;
+```
+![contador usuarios activos](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/usuarios-activos.png)
+
+Aqui la podemos comprar con una operacion directa
+```sql
+SELECT estado.nombre AS Estado, COUNT(u.DNI_usuario) AS Cantidad FROM dbo.Usuario u
+JOIN 
+    dbo.Estado estado ON u.id_estado = estado.id_estado
+GROUP BY 
+    estado.nombre;
+```
+
+Y por ultimo esta funcion se encarga de contar cuantas ventas tiene un cliente a traves de su dni
+
+```sql
+--Funcion para ver cuantas comprar tienen asociados los clientes	
+
+CREATE FUNCTION F_CantidadVentasClientes
+(
+    @dni_cliente VARCHAR(200)
+)
+RETURNS VARCHAR(100)
+AS
+BEGIN
+    DECLARE @cantidadVentas INT;
+    DECLARE @nombre VARCHAR(200);
+
+    -- Obtener la cantidad de ventas del cliente desde la tabla Venta
+    SELECT @cantidadVentas = COUNT(*) FROM dbo.Venta
+    WHERE DNI_cliente = @dni_cliente;
+
+    -- Obtener el nombre del cliente desde la tabla Cliente
+    SELECT @nombre = nombre FROM dbo.Cliente
+    WHERE DNI_cliente = @dni_cliente;
+
+    -- Devolver el resultado concatenado
+    RETURN CONCAT(@nombre, ' - ', CAST(@cantidadVentas AS VARCHAR (20)), ' - ', 'Venta/s');
+END;
+```
+![ventas clientes](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/ventas-clientes.png)
+
+Y aqui la podemos comparar con una operacion directa
+
+```sql
+--Operacion directa para contar las ventas que tiene un cliente por su dni
+select DNI_cliente, COUNT(cod_venta) as Ventas from dbo.Venta
+where DNI_cliente = '89012345'
+group by
+DNI_cliente
+```
+![ventas clientes directa](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/ProcedimientosYFuncionesAlmacenadas/venta-cliente-directa.png)
+
+> Acceder a la siguiente carpeta para leer el script [scripts-> tema_2](script/Procedimientos-y-Funciones-Almacenadas.sql)
 
 ## TEMA 3: Optimización de consultas a través de índices
 
