@@ -375,6 +375,15 @@ WHERE fecha_venta BETWEEN '2010-01-01' AND '2018-12-31';
 
 ![Costo ejecucion ambas con indice](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/costoEjecucionAmbas_3.png)
 
+### Conclusion sobre el resultado del costo y el plan de ejecucion de ambas consultas con indices
+
+El "Index Seek" en la tabla venta2 muestra una mayor eficiencia que el "Index Scan" en la tabla Venta. Esto se debe a que, al tener un índice agrupado sobre las columnas fecha_venta, cod_venta, y DNI_usuario, SQL Server puede dirigirse directamente a las filas correspondientes al rango de fechas solicitado. Esta optimización reduce el tiempo de procesamiento y el costo de la consulta.
+
+La consulta con "Index Seek" tuvo un tiempo de respuesta menor (3 segundos) comparado con la consulta de "Index Scan" (4 segundos). Esto demuestra cómo un índice bien diseñado puede mejorar el rendimiento, especialmente en tablas grandes o consultas frecuentes.
+
+Aunque el plan de ejecución muestra un costo similar 48% vs. 52%, el "Index Seek" tiene un impacto directo en el tiempo de respuesta. Esto confirma que el uso de índices adecuados puede mejorar significativamente el rendimiento, aunque el costo relativo en términos de porcentaje no siempre muestre una diferencia muy amplia.
+
+> Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/indices.sql)
 
 
 ### Diagrama relacional
