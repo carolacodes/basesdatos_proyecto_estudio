@@ -414,7 +414,7 @@ Tipos de Restauración
 
 Tareas:
 •	Verificar que el modelo de recuperación de la base de datos esté en el modo adecuado para realizar backup en línea.
-
+```sql
 --- Configurar el modelo de recuperación en FULL
 -- Cambia el modelo de recuperación de la base de datos a FULL para habilitar la realización de backups de logs de transacciones
 ALTER DATABASE sistema_gestor_de_ventas
@@ -424,14 +424,17 @@ SET RECOVERY FULL;
 SELECT name, recovery_model_desc
 FROM sys.databases
 WHERE name = 'sistema_gestor_de_ventas';
+```
 
 ![modelo_de_recuperacion](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/modelo_de_recuperacion.png)
 
 •	Realizar un backup full de la base de datos.
 
+```sql
 BACKUP DATABASE sistema_gestor_de_ventas
 TO DISK = 'C:\backups\sistema_gestor_de_ventas_full.bak.'
 WITH FORMAT, INIT;
+```
 
 •	Generar 10 inserts sobre una tabla de referencia.
 
@@ -440,7 +443,7 @@ WITH FORMAT, INIT;
 ![proveedores_full_Backup](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_Full_Backup.png)
 
 •	Generar 10 inserts sobre una tabla de referencia.
-
+```sql
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor D', 'Calle nueva 234', 3764265874, 'proveedorD@gmail.com', 'www.proveedord.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor E', 'Calle nueva 345', 3764265871, 'proveedorE@gmail.com', 'www.proveedore.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor F', 'Calle nueva 456', 3764265872, 'proveedorF@gmail.com', 'www.proveedorf.com',1)
@@ -451,10 +454,12 @@ insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) value
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor K', 'Calle nueva 912', 3764265877, 'proveedorK@gmail.com', 'www.proveedork.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor L', 'Calle nueva 123', 3764265878, 'proveedorL@gmail.com', 'www.proveedorl.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor M', 'Calle nueva 233', 3764265879, 'proveedorM@gmail.com', 'www.proveedorm.com',1)
-
+```
 ![proveedores_LOG](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG.png)
 
 •	Realizar backup del archivo de log y registrar la hora del backup
+
+```sql
 --- Crea un backup del log de transacciones en el archivo especificado
 BACKUP LOG sistema_gestor_de_ventas
 TO DISK = 'C:\backups\sistema_gestor_de_ventas_log.bak.'
@@ -464,9 +469,10 @@ WITH INIT;
 DECLARE @HoraBackup DATETIME;
 SET @HoraBackup = GETDATE();
 PRINT 'Backup del archivo de log completado a las: ' + CONVERT(VARCHAR, @HoraBackup, 120);
+```
 
 •	Generar otros 10 insert sobre la tabla de referencia.
-
+```sql
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 1', 'Calle 234', 3795265874, 'proveedor1@gmail.com', 'www.proveedor1.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 2', 'Calle 345', 3795265871, 'proveedor2@gmail.com', 'www.proveedor2.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 3', 'Calle 456', 3795265872, 'proveedor3@gmail.com', 'www.proveedor3.com',1)
@@ -477,11 +483,11 @@ insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) value
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 8', 'Calle 912', 3795265877, 'proveedor8@gmail.com', 'www.proveedor8.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 9', 'Calle 123', 3795265878, 'proveedor9@gmail.com', 'www.proveedor9.com',1)
 insert into Proveedor (nombre, direccion, telefono, email, web, id_estado) values ('Proveedor 10', 'Calle 233',3795265879,'proveedor10@gmail.com','www.proveedor10.com',1)
-
+```
 ![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
 
 •	Realizar nuevamente backup de archivo de log  en otro archivo físico.
-
+```sql
 BACKUP LOG sistema_gestor_de_ventas
 TO DISK = 'C:\backups\sistema_gestor_de_ventas_log2.bak.'
 WITH INIT;
@@ -490,9 +496,9 @@ WITH INIT;
 DECLARE @HoraBackup DATETIME;
 SET @HoraBackup = GETDATE();
 PRINT 'Backup del archivo de log completado a las: ' + CONVERT(VARCHAR, @HoraBackup, 120);
-
+```
 •	Restaurar la base de datos al momento del primer backup del archivo de log. Es decir después de los primeros 10 insert.
-
+```sql
 --- Restaurar la base de datos al estado después del primer backup del log
 -- Cambia el contexto a la base de datos 'master' antes de realizar la restauración
 USE master;
@@ -510,11 +516,11 @@ WITH RECOVERY;
 -- Cambia el contexto de nuevo a la base de datos 'sistema_gestor_de_ventas' y muestra el estado actual de la tabla
 USE sistema_gestor_de_ventas;
 select * from Proveedor
-
+```
 ![proveedores_LOG](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG.png)
 
 •	Restaurar la base de datos aplicando ambos archivos de log.
-
+```sql
 --- Restaurar la base de datos aplicando ambos archivos de log
 -- Cambia el contexto a 'master' antes de iniciar otra restauración completa
 USE master;
@@ -537,7 +543,7 @@ WITH RECOVERY;
 -- Cambia el contexto a la base de datos restaurada y muestra los datos actuales en la tabla 'Proveedor'
 USE sistema_gestor_de_ventas;
 select * from Proveedor
-
+```
 ![proveedores_LOG2](https://github.com/carolacodes/basesdatos_proyecto_estudio/blob/main/assets/Backup/proveedores_LOG_2.png)
 
 
