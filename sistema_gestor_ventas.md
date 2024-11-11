@@ -325,7 +325,7 @@ En un índice no agrupado, los nodos hoja no contienen las páginas de datos rea
 ### ¿Qué es el plan de ejecución estimado?
 El plan de ejecución estimado es un análisis previo que SQL Server hace para decidir cómo responderá a una consulta, evaluando las diferentes formas de acceder a los datos y calculando cuál es la más eficiente. SQL Server toma en cuenta factores como índices, estadísticas y el diseño de la consulta para elegir la estrategia óptima.
 
-## TEMA 4: Backup y restore
+## TEMA 4: Backup y Restore
 
 Además, la implementación de mecanismos de respaldo y restauración (backup y restore) es crucial para garantizar la protección de la información ante posibles pérdidas. Los sistemas de gestión de base de datos deben incluir procedimientos robustos que permitan realizar copias de seguridad periódicas de toda la información almacenada, así como la posibilidad de restaurar rápidamente los datos en caso de fallos técnicos, pérdidas de datos o ataques cibernéticos. Esta capacidad de recuperación no solo asegura la continuidad del negocio, sino que también proporciona tranquilidad a los gestores, sabiendo que la información crítica está protegida y puede ser recuperada cuando sea necesario.
 
@@ -360,8 +360,6 @@ Tipos de Restauración
 Por último, un sistema de gestión de base de datos bien diseñado también debe considerar la escalabilidad y la adaptabilidad a futuro. A medida que el negocio crece y evoluciona, la base de datos debe ser capaz de adaptarse a nuevos requerimientos y manejar mayores volúmenes de información sin comprometer el rendimiento. Esto implica la necesidad de una planificación cuidadosa en la fase de diseño y la elección de tecnologías que permitan integrar nuevas funcionalidades con facilidad.
 
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
-
-## TEMA 4:
 
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
