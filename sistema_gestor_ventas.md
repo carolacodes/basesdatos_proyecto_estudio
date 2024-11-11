@@ -362,20 +362,37 @@ Por último, un sistema de gestión de base de datos bien diseñado también deb
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
 
 
-## CAPÍTULO III: METODOLOGÍA SEGUIDA 
+## CAPÍTULO III: METODOLOGÍA SEGUIDA
 
-Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luctus sed fringilla non, ullamcorper at eros.
+a) Cómo se realizó el Trabajo Práctico
 
- **a) Cómo se realizó el Trabajo Práctico**
-Vestibulum rutrum feugiat molestie. Nunc id varius augue. Ut augue mauris, venenatis et lacus ut, mattis blandit urna. Fusce lobortis, quam non vehicula scelerisque, nisi enim ultrices diam, ac tristique libero ex nec orci.
+Para llevar a cabo el trabajo, se siguió un procedimiento estructurado que permitió desarrollar y ejecutar cada una de las fases del proyecto de manera sistemática y ordenada.
 
- **b) Herramientas (Instrumentos y procedimientos)**
-Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luctus sed fringilla non, ullamcorper at eros. Integer interdum id orci id rutrum. Curabitur facilisis lorem sed metus interdum accumsan. 
+Planificación: Se establecieron los objetivos y se definieron las fases necesarias para la ejecución. La planificación incluyó la elaboración de un cronograma para la organización temporal de cada actividad.
+
+Desarrollo: Se implementaron las fases definidas en la planificación, con una especial atención en cada detalle técnico y metodológico, asegurando la integridad de los datos y la precisión en los resultados.
+
+Validación: Una vez completadas las fases de desarrollo, se procedió a verificar los resultados mediante pruebas y evaluaciones para garantizar su fiabilidad y cumplimiento con los objetivos planteados.
+
+Documentación: Se registraron los procedimientos seguidos y los resultados obtenidos en cada etapa del trabajo práctico, asegurando así la transparencia y trazabilidad del estudio.
+
+b) Herramientas (Instrumentos y procedimientos)
+
+Las herramientas y procedimientos empleados para la recopilación de información se basaron en fuentes digitales oficiales y accesibles públicamente, como se describe a continuación:
+
+Instrumentos:
+
+Búsqueda en sitios web oficiales: Se utilizaron motores de búsqueda académicos y bases de datos institucionales para obtener información precisa y actualizada.
+Revisión de informes y documentos oficiales: Se consultaron informes, publicaciones, y documentos técnicos de organismos gubernamentales y otras entidades autorizadas para garantizar la veracidad de la información.
+Procedimientos:
+
+Acceso a fuentes confiables: Se llevaron a cabo búsquedas en sitios como páginas oficiales de organismos públicos, investigaciones académicas y otras plataformas de acceso libre, asegurándose de que toda la información fuera respaldada por fuentes autorizadas.
+Filtrado de la información: Se filtraron los datos obtenidos, seleccionando solo aquellos que cumplían con los criterios de relevancia y actualidad establecidos al inicio del trabajo.
+Con esta metodología, el trabajo se centró en obtener información confiable y verificada, lo que asegura que los resultados y conclusiones estén basados en hechos y datos sólidos.
 
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS 
 
-Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris tortor nisl, ultricies ac scelerisque nec, feugiat in nibh. Pellentesque interdum aliquam magna sit amet rutrum. 
 
 ## TEMA 2: Procediminetos y Funciones Almacenadas
 
@@ -992,35 +1009,6 @@ select * from Proveedor
 ### Diccionario de datos
 
 Acceso al documento [PDF](doc/Diccionarios_Datos.pdf) del diccionario de datos.
-
-## CAPÍTULO III: METODOLOGÍA SEGUIDA
-
-a) Cómo se realizó el Trabajo Práctico
-
-Para llevar a cabo el trabajo, se siguió un procedimiento estructurado que permitió desarrollar y ejecutar cada una de las fases del proyecto de manera sistemática y ordenada.
-
-Planificación: Se establecieron los objetivos y se definieron las fases necesarias para la ejecución. La planificación incluyó la elaboración de un cronograma para la organización temporal de cada actividad.
-
-Desarrollo: Se implementaron las fases definidas en la planificación, con una especial atención en cada detalle técnico y metodológico, asegurando la integridad de los datos y la precisión en los resultados.
-
-Validación: Una vez completadas las fases de desarrollo, se procedió a verificar los resultados mediante pruebas y evaluaciones para garantizar su fiabilidad y cumplimiento con los objetivos planteados.
-
-Documentación: Se registraron los procedimientos seguidos y los resultados obtenidos en cada etapa del trabajo práctico, asegurando así la transparencia y trazabilidad del estudio.
-
-b) Herramientas (Instrumentos y procedimientos)
-
-Las herramientas y procedimientos empleados para la recopilación de información se basaron en fuentes digitales oficiales y accesibles públicamente, como se describe a continuación:
-
-Instrumentos:
-
-Búsqueda en sitios web oficiales: Se utilizaron motores de búsqueda académicos y bases de datos institucionales para obtener información precisa y actualizada.
-Revisión de informes y documentos oficiales: Se consultaron informes, publicaciones, y documentos técnicos de organismos gubernamentales y otras entidades autorizadas para garantizar la veracidad de la información.
-Procedimientos:
-
-Acceso a fuentes confiables: Se llevaron a cabo búsquedas en sitios como páginas oficiales de organismos públicos, investigaciones académicas y otras plataformas de acceso libre, asegurándose de que toda la información fuera respaldada por fuentes autorizadas.
-Filtrado de la información: Se filtraron los datos obtenidos, seleccionando solo aquellos que cumplían con los criterios de relevancia y actualidad establecidos al inicio del trabajo.
-Con esta metodología, el trabajo se centró en obtener información confiable y verificada, lo que asegura que los resultados y conclusiones estén basados en hechos y datos sólidos.
-
 
 ## CAPÍTULO V: CONCLUSIONES
 
