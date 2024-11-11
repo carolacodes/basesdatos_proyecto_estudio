@@ -393,12 +393,159 @@ Con esta metodología, el trabajo se centró en obtener información confiable y
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS 
 
+## TEMA 1: Manejo de permisos a nivel de usuarios de base de datos
+
+Primero se ha realizado la creación de los diferentes roles necesarios en la aplicación:
+
+-- Paso 1: Creación de roles
+```
+CREATE ROLE AdminRol;
+CREATE ROLE ReadOnlyRol;
+```
+Luego se han asignado los diferentes permisos para cada uno de los mismos
+```
+GRANT ALTER, CONTROL, DELETE, INSERT, SELECT, UPDATE TO AdminRol;
+GRANT SELECT TO ReadOnlyRol;
+```
+Continuando por la creación de usuarios y por consiguiente la asignación de roles a los diferentes usuarios creados previamente.
+Es necesario poder enteder que en este caso se han restringido cada una de las acciones del rol ReadOnly a algunas tablas para interactuar con las mismas al momento de probar su funcionamiento.
+```
+-- Permisos de lectura para la tabla Categoria
+GRANT SELECT ON Categoria TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Rol
+GRANT SELECT ON Rol TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Negocio
+GRANT SELECT ON Negocio TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Metodo_Pago
+GRANT SELECT ON Metodo_Pago TO ReadOnlyRol;
+
+-- Permisos de lectura para la tabla Estado
+GRANT SELECT ON Estado TO ReadOnlyRol;
+```
+
+Luego, ante la prueba de acciones con los diferentes usuarios existentes a fin de poder observar su funcionamiento, restricciones y permisos que tienen cada uno de los mismos:
+```
+/*Conexion a la base de datos utilizando el usuario admin_user. 
+Verificacion de poder realizar consultas de lectura y escritura (INSERT, UPDATE, DELETE) en las tablas de la base de datos. */
+
+/*Prueba de Select con usuario de admin*/
+SELECT * FROM Categoria;
+
+/*Insert prueba*/
+INSERT INTO dbo.Categoria (nombre) VALUES ('Sopas instantaneas');
+
+/*Update prueba*/
+UPDATE dbo.Categoria SET nombre = 'Sopas' WHERE id_categoria = 11;
+
+/*Delete prueba*/
+DELETE FROM dbo.Categoria WHERE id_categoria = 11;
+```
+
+```
+/*Conexion a la base de datos utilizando el usuario usuario read_only_user. 
+Verificacion que solo puedes hacer consultas de lectura (SELECT) y que los comandos de escritura (INSERT, UPDATE, DELETE) están restringidos.*/
+SELECT * FROM Categoria;
+
+/*Insert prueba*/
+INSERT INTO dbo.Categoria (nombre) VALUES ('Sopas instantaneas');
+
+/*Update prueba*/
+UPDATE dbo.Categoria SET nombre = 'Sopas instantáneas' WHERE id_categoria = 13;
+
+/*Delete prueba*/
+DELETE FROM dbo.Categoria WHERE id_categoria = 13;
+```
+
+Empleo de procedimiento almacenado para prueba de funcionamiento:
+
+```
+/* REGISTRO DE CATEGORIA */
+GO
+CREATE OR ALTER PROC SP_REGISTROCATEGORIA
+(
+    @id_categoria INT,
+    @nombre VARCHAR(50),
+    @Respuesta INT OUTPUT,
+    @Mensaje VARCHAR(200) OUTPUT
+)
+AS
+BEGIN
+    SET @Respuesta = 0
+    SET @Mensaje = ''
+
+    -- Validar que no exista otra categoría con el mismo nombre
+    IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
+    BEGIN
+        SET @Mensaje = 'Categoría ya existente.'
+        SET @Respuesta = -1
+        RETURN
+    END
+
+    BEGIN TRY
+        -- Insertar la nueva categoría
+        INSERT INTO dbo.categoria (nombre) VALUES (@nombre)
+
+        -- Establecer el ID y mensaje de éxito
+        SET @Respuesta = SCOPE_IDENTITY(); -- Obtiene el ID recién insertado
+        SET @Mensaje = 'Categoría creada exitosamente.'
+    END TRY
+    BEGIN CATCH
+        -- Manejo de errores en caso de que ocurra un conflicto de clave única u otro error
+        SET @Mensaje = ERROR_MESSAGE(); -- Captura el mensaje de error de SQL Server
+        SET @Respuesta = -1; -- Indica que hubo un error
+    END CATCH
+END
+```
 
 ## TEMA 2: Procediminetos y Funciones Almacenadas
 
 ### Procediminetos Almacenados
 
-Primero realizamos procediminetos alamacenados para insertar un proveedor.
+Segundo realizamos procediminetos alamacenados para insertar un proveedor.
+
+```sql
+/* REGISTRO DE CATEGORIA */
+GO
+CREATE OR ALTER PROC SP_REGISTROCATEGORIA
+(
+    @id_categoria INT,
+    @nombre VARCHAR(50),
+    @Respuesta INT OUTPUT,
+    @Mensaje VARCHAR(200) OUTPUT
+)
+AS
+BEGIN
+    SET @Respuesta = 0
+    SET @Mensaje = ''
+
+    -- Validar que no exista otra categoría con el mismo nombre
+    IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
+    BEGIN
+        SET @Mensaje = 'Categoría ya existente.'
+        SET @Respuesta = -1
+        RETURN
+    END
+
+    BEGIN TRY
+        -- Insertar la nueva categoría
+        INSERT INTO dbo.categoria (nombre) VALUES (@nombre)
+
+        -- Establecer el ID y mensaje de éxito
+        SET @Respuesta = SCOPE_IDENTITY(); -- Obtiene el ID recién insertado
+        SET @Mensaje = 'Categoría creada exitosamente.'
+    END TRY
+    BEGIN CATCH
+        -- Manejo de errores en caso de que ocurra un conflicto de clave única u otro error
+        SET @Mensaje = ERROR_MESSAGE(); -- Captura el mensaje de error de SQL Server
+        SET @Respuesta = -1; -- Indica que hubo un error
+    END CATCH
+END
+```
+
+Segundo realizamos procediminetos alamacenados para insertar un proveedor.
 
 ```sql
 --Insercion de proveedor
@@ -864,7 +1011,7 @@ Aunque el plan de ejecución muestra un costo similar 48% vs. 52%, el "Index See
 
 > Acceder a la siguiente carpeta para leer el script [scripts-> tema_3](script/indices.sql)
 
-### TEMA: BACKUP Y RESTORE
+## TEMA 4: BACKUP Y RESTORE
 
 •	Verificar que el modelo de recuperación de la base de datos esté en el modo adecuado para realizar backup en línea.
 ```sql
