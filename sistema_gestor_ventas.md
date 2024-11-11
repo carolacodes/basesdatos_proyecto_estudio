@@ -147,6 +147,7 @@ BEGIN
 	IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
 	BEGIN
         SET @Mensaje = 'Categoría ya existente.'
+	PRINT @Mensaje
         RETURN
     END
 
@@ -155,6 +156,7 @@ BEGIN
 
 	SET @Respuesta = SCOPE_IDENTITY(); -- Para realizar la carga del id con el ultimo generado
 	SET @Mensaje = 'Categoría creada exitosamente.'
+	PRINT @Mensaje
 END
 ```
 Luego se han concedido permisos de ejecución del procedimiento para ambos usuarios anteriormente creados:
@@ -466,41 +468,44 @@ Empleo de procedimiento almacenado para prueba de funcionamiento:
 ```
 /* REGISTRO DE CATEGORIA */
 GO
-CREATE OR ALTER PROC SP_REGISTROCATEGORIA
+CREATE PROC SP_REGISTROCATEGORIA
 (
-    @id_categoria INT,
-    @nombre VARCHAR(50),
-    @Respuesta INT OUTPUT,
-    @Mensaje VARCHAR(200) OUTPUT
+@id_categoria int,
+@nombre varchar(50),
+@Respuesta int output,
+@Mensaje varchar(200) output
 )
 AS
 BEGIN
-    SET @Respuesta = 0
-    SET @Mensaje = ''
+	SET @Respuesta = 0
+	SET @Mensaje = ''
 
-    -- Validar que no exista otra categoría con el mismo nombre
-    IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
-    BEGIN
+	-- Para validar que no exista otra categoria con mismo nombre
+	IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
+	BEGIN
         SET @Mensaje = 'Categoría ya existente.'
-        SET @Respuesta = -1
+	PRINT @Mensaje
         RETURN
     END
 
-    BEGIN TRY
-        -- Insertar la nueva categoría
-        INSERT INTO dbo.categoria (nombre) VALUES (@nombre)
+	INSERT INTO dbo.categoria (nombre) VALUES
+		(@nombre)
 
-        -- Establecer el ID y mensaje de éxito
-        SET @Respuesta = SCOPE_IDENTITY(); -- Obtiene el ID recién insertado
-        SET @Mensaje = 'Categoría creada exitosamente.'
-    END TRY
-    BEGIN CATCH
-        -- Manejo de errores en caso de que ocurra un conflicto de clave única u otro error
-        SET @Mensaje = ERROR_MESSAGE(); -- Captura el mensaje de error de SQL Server
-        SET @Respuesta = -1; -- Indica que hubo un error
-    END CATCH
+	SET @Respuesta = SCOPE_IDENTITY(); -- Para realizar la carga del id con el ultimo generado
+	SET @Mensaje = 'Categoría creada exitosamente.'
+	PRINT @Mensaje
 END
 ```
+
+El sistema de manejo de permisos a nivel de usuarios implementado ha demostrado ser una solución eficaz para controlar el acceso a los datos y operaciones dentro de la base de datos. La creación y asignación de roles como AdminRol y ReadOnlyRol ha permitido definir con claridad los niveles de acceso que cada tipo de usuario tiene, lo cual es fundamental para proteger la integridad de la información y para cumplir con requisitos de seguridad dentro de la aplicación.
+
+El proceso de pruebas realizadas sobre los roles, especialmente la verificación de las restricciones de escritura para el rol de solo lectura (ReadOnlyRol), ha validado que los permisos están correctamente configurados. Los usuarios con rol AdminRol pueden realizar todas las operaciones necesarias, como la inserción, actualización y eliminación de registros, sin restricción alguna. En cambio, los usuarios con rol ReadOnlyRol se han limitado exclusivamente a realizar consultas de lectura (SELECT), lo que asegura que no puedan modificar ni eliminar datos sensibles de la base de datos.
+
+Además, la implementación de procedimientos almacenados, como el que permite registrar nuevas categorías, añade una capa adicional de seguridad al sistema. Estos procedimientos almacenados no solo permiten realizar operaciones de manera eficiente, sino que también incluyen validaciones (como la comprobación de duplicados), lo cual previene posibles errores o inconsistencias en los datos.
+
+El uso de procedimientos almacenados también facilita la centralización de la lógica de negocio en la base de datos, reduciendo la posibilidad de errores en el código de la aplicación y mejorando el rendimiento al evitar duplicación de lógica en diversas partes del sistema.
+
+La correcta implementación de roles y permisos en la base de datos es esencial para mantener la seguridad y eficiencia en una aplicación. La división de responsabilidades entre los diferentes usuarios, junto con el uso de procedimientos almacenados para optimizar y proteger las operaciones, garantiza una gestión robusta y confiable de los datos. Este enfoque no solo mejora la seguridad, sino que también facilita la administración de la base de datos a medida que la aplicación crece y evoluciona.
 
 ## TEMA 2: Procediminetos y Funciones Almacenadas
 
@@ -511,39 +516,32 @@ Segundo realizamos procediminetos alamacenados para insertar un proveedor.
 ```sql
 /* REGISTRO DE CATEGORIA */
 GO
-CREATE OR ALTER PROC SP_REGISTROCATEGORIA
+CREATE PROC SP_REGISTROCATEGORIA
 (
-    @id_categoria INT,
-    @nombre VARCHAR(50),
-    @Respuesta INT OUTPUT,
-    @Mensaje VARCHAR(200) OUTPUT
+@id_categoria int,
+@nombre varchar(50),
+@Respuesta int output,
+@Mensaje varchar(200) output
 )
 AS
 BEGIN
-    SET @Respuesta = 0
-    SET @Mensaje = ''
+	SET @Respuesta = 0
+	SET @Mensaje = ''
 
-    -- Validar que no exista otra categoría con el mismo nombre
-    IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
-    BEGIN
+	-- Para validar que no exista otra categoria con mismo nombre
+	IF EXISTS(SELECT * FROM dbo.categoria WHERE nombre = @nombre)
+	BEGIN
         SET @Mensaje = 'Categoría ya existente.'
-        SET @Respuesta = -1
+	PRINT @Mensaje
         RETURN
     END
 
-    BEGIN TRY
-        -- Insertar la nueva categoría
-        INSERT INTO dbo.categoria (nombre) VALUES (@nombre)
+	INSERT INTO dbo.categoria (nombre) VALUES
+		(@nombre)
 
-        -- Establecer el ID y mensaje de éxito
-        SET @Respuesta = SCOPE_IDENTITY(); -- Obtiene el ID recién insertado
-        SET @Mensaje = 'Categoría creada exitosamente.'
-    END TRY
-    BEGIN CATCH
-        -- Manejo de errores en caso de que ocurra un conflicto de clave única u otro error
-        SET @Mensaje = ERROR_MESSAGE(); -- Captura el mensaje de error de SQL Server
-        SET @Respuesta = -1; -- Indica que hubo un error
-    END CATCH
+	SET @Respuesta = SCOPE_IDENTITY(); -- Para realizar la carga del id con el ultimo generado
+	SET @Mensaje = 'Categoría creada exitosamente.'
+	PRINT @Mensaje
 END
 ```
 
