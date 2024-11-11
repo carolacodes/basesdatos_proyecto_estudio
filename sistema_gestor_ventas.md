@@ -68,25 +68,26 @@ En SQL Server, la administración de permisos se realiza a nivel de servidor med
 
 Para este caso en particular se han creado roles específicos y luego creado los usuarios:
 -- Paso 1: Creación de roles
-
+```
 CREATE ROLE AdminRol;
 CREATE ROLE ReadOnlyRol;
 
 GRANT ALTER, CONTROL, DELETE, INSERT, SELECT, UPDATE TO AdminRol;
 GRANT SELECT TO ReadOnlyRol;
-
+```
 -- Paso 2: Creación de los usuarios
-
+```
 CREATE LOGIN admin_user WITH PASSWORD = 'AdminPassword123';
 CREATE USER admin_user FOR LOGIN admin_user;
 
 CREATE LOGIN read_user WITH PASSWORD = 'ReadPassword123';
 CREATE USER read_user FOR LOGIN read_user;
-
+```
 ![creacion de usuarios](https://github.com/user-attachments/assets/9d3d31aa-4741-4095-b6d6-a89b9df799fd)
 
 -- Paso 3: Asignación de permisos de solo lectura para algunas tablas para el rol ReadOnlyRol
 -- Permisos de lectura para la tabla Categoria
+```
 GRANT SELECT ON Categoria TO ReadOnlyRol;
 
 -- Permisos de lectura para la tabla Rol
@@ -102,31 +103,32 @@ GRANT SELECT ON Metodo_Pago TO ReadOnlyRol;
 GRANT SELECT ON Estado TO ReadOnlyRol;
 
 -- Paso 3: Asignación de roles a los usuarios
-
+```
+```
 -- Asignación de rol de administrador al usuario admin_user
 EXEC sp_addrolemember 'AdminRol', 'admin_user';
 
 -- Asignación de rol de solo lectura al usuario read_user
 EXEC sp_addrolemember 'ReadOnlyRol', 'read_user';
-
+```
 Verificación de acciones de consultas de lectura y escritura (INSERT, UPDATE, DELETE) en las tablas de la base de datos utilizando el usuario admin_user:
-
+```
 /*Select con usuario de admin_user*/
 SELECT * FROM Categoria;
 
 /*Insert*/
 INSERT INTO dbo.Categoria (nombre) VALUES ('Sopas instantaneas');
-
+```
 ![insert de admin](https://github.com/user-attachments/assets/8abf85f1-ed07-4dd2-89b6-c2fc4db9a1a6)
-
+```
 /*Update*/
 UPDATE dbo.Categoria SET nombre = 'Sopas' WHERE id_categoria = 11;
 
 /*Delete*/
 DELETE FROM dbo.Categoria WHERE id_categoria = 11;
-
+```
 Las diferentes acciones con dicho usuario creado no se verifican restricciones ni errores existentes al realizar diversas acciones en cualquier tabla de la base de datos. Al igual que al momento de ejecutar un procedimiento almacenado para una de las tablas, se puede crear el mismo como así también realizar diferentes inserciones, para la prueba de dicho procedimiento almacenado.
-
+```
 /* REGISTRO DE CATEGORIA */
 GO
 CREATE PROC SP_REGISTROCATEGORIA
@@ -154,12 +156,12 @@ BEGIN
 	SET @Respuesta = SCOPE_IDENTITY(); -- Para realizar la carga del id con el ultimo generado
 	SET @Mensaje = 'Categoría creada exitosamente.'
 END
-
+```
 Luego se han concedido permisos de ejecución del procedimiento para ambos usuarios anteriormente creados:
-
+```
 GRANT EXECUTE ON SP_REGISTROCATEGORIA TO AdminRol;
 GRANT EXECUTE ON SP_REGISTROCATEGORIA TO ReadOnlyRol;
-
+```
 El usuario con permisos de administrador deberá poder insertar datos, mientras que el usuario de sólo lectura no debería poder hacerlo a menos que se le otorguen permisos específicos. Sin embargo, tomando en consideración las restricciones creadas antes sobre la tabla de categoría, se produzca un error debido a la falta de permisos para el usuario de lectura.
 
 ![procedimiento](https://github.com/user-attachments/assets/a18f203d-004f-453a-944f-a5afb9f039fe)
