@@ -1026,22 +1026,22 @@ Con esta metodología, el trabajo se centró en obtener información confiable y
 
 A lo largo de este Trabajo, el equipo tuvo la oportunidad de profundizar en diversos aspectos fundamentales para el manejo de sistemas informáticos, específicamente en lo que respecta a la gestión de usuarios, los procedimientos de respaldo y el uso de índices en bases de datos. La información recabada de fuentes oficiales nos permitió obtener una visión más clara sobre cómo implementar buenas prácticas en estos temas, que son esenciales para el buen funcionamiento y la seguridad de cualquier sistema.
 
-# Gestión de Usuarios
+#### Gestión de Usuarios
 Uno de los puntos más relevantes que descubrimos fue la complejidad de la gestión de usuarios en los sistemas. Si bien en un principio el tema parecía sencillo, pronto nos dimos cuenta de que la creación de roles adecuados, la asignación precisa de permisos y la administración de accesos requieren un enfoque planificado y cuidadoso. A través de la investigación, comprendimos la importancia de una gestión centralizada de usuarios que permita auditar constantemente las acciones realizadas. La segmentación de permisos y la implementación de protocolos de autenticación robustos son aspectos fundamentales para mantener la seguridad del sistema y proteger los datos sensibles. Este proceso nos permitió entender lo crucial que es tener un sistema de gestión de usuarios bien diseñado desde el inicio de un proyecto.
 
-# Procedimientos de Backup
+#### Procedimientos de Backup
 En cuanto a los procedimientos de respaldo, comprendimos que los backups son esenciales para la continuidad y seguridad del sistema. Aprendimos que no basta con hacer un respaldo regular de las bases de datos y archivos importantes, sino que es necesario establecer una estrategia clara que contemple la ubicación segura de los respaldos, su cifrado y la frecuencia con que deben realizarse. Además, se debe realizar una verificación periódica de los respaldos para asegurar que, en caso de emergencia, estos puedan ser restaurados de manera efectiva. Este aprendizaje nos hizo entender que una estrategia de respaldo bien implementada puede marcar la diferencia entre una recuperación exitosa y una pérdida irreversible de datos.
 
-# Índices en Bases de Datos
+#### Índices en Bases de Datos
 El uso de índices en bases de datos fue otro tema de gran relevancia. A través de la investigación, comprendimos que los índices son herramientas poderosas para mejorar el rendimiento de las consultas en una base de datos. Sin embargo, también aprendimos que deben ser gestionados de manera adecuada, ya que un uso excesivo o incorrecto de los índices puede perjudicar el rendimiento global del sistema, especialmente cuando se trabaja con bases de datos grandes. Entendimos que la clave está en elegir las columnas adecuadas para la creación de índices y mantenerlos actualizados de manera eficiente. Esto nos permitió ver cómo optimizar la velocidad de las consultas sin comprometer el rendimiento general del sistema.
 
-Reflexión Grupal
+#### Reflexión Grupal
 A nivel grupal, este trabajo nos permitió entender la importancia de adoptar un enfoque integral para la gestión de usuarios, los respaldos y el rendimiento de las bases de datos. Nos dimos cuenta de que cada uno de estos aspectos está interrelacionado y que una mala práctica en cualquiera de estos elementos puede afectar gravemente la seguridad, eficiencia y estabilidad del sistema. Además, aprendimos que la prevención, a través de la gestión adecuada de usuarios y la implementación de respaldos regulares, es fundamental para evitar problemas en el futuro.
 
-Cumplimiento de los Objetivos
+#### Cumplimiento de los Objetivos
 Los objetivos establecidos al principio del trabajo fueron cumplidos de manera satisfactoria. Pudimos obtener información clave sobre cada uno de los temas mencionados y reflexionar sobre cómo aplicar esas buenas prácticas en un entorno real. La recopilación de datos desde sitios oficiales y la revisión de procedimientos recomendados nos permitió tener una visión clara y bien fundamentada sobre cómo implementar estos conceptos de forma efectiva.
 
-Conclusión Final
+#### Conclusión Final
 En conclusión, este trabajo práctico nos brindó una comprensión más profunda sobre la gestión de usuarios, los procedimientos de respaldo y la optimización del uso de índices en bases de datos. Cada uno de estos aspectos es fundamental para garantizar la seguridad, el rendimiento y la fiabilidad de los sistemas informáticos. El conocimiento adquirido a través de la investigación nos permitirá aplicar buenas prácticas en futuros proyectos, asegurando tanto la seguridad como la eficiencia de los sistemas con los que trabajemos. Sin duda, esta experiencia nos proporcionó valiosas lecciones sobre la planificación y la atención al detalle en la administración de sistemas informáticos.
 
 
