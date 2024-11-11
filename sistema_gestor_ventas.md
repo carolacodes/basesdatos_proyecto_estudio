@@ -56,9 +56,11 @@ El registro de cada una de las acciones dentro de un negocio es crucial no solo 
 
 Las innovaciones tecnológicas juegan un papel fundamental en la creación de sistemas de gestión efectivos, especialmente en el ámbito empresarial. La incorporación de herramientas digitales en los procesos de gestión permite a los negocios optimizar su funcionamiento y mejorar la eficiencia operativa. Estas tecnologías no solo facilitan la automatización de tareas repetitivas, sino que también mejoran la precisión y la velocidad en la recopilación y el análisis de datos, lo cual es indispensable en un entorno empresarial en constante cambio y creciente competitividad.
 
-En el contexto de la realización de un sistema motor de base de datos, es esencial incluir una serie de características que garanticen un funcionamiento óptimo y una gestión eficaz de la información. Una de estas características son los procedimientos almacenados, que permiten la ejecución de operaciones complejas en el servidor de forma eficiente. Al integrar estos procedimientos, se reduce significativamente la posibilidad de cometer errores en la incorporación de la información, garantizando que los datos sean introducidos de manera consistente y precisa. Esto no solo optimiza la gestión de las transacciones, sino que también asegura la integridad y fiabilidad de la información, aspectos críticos para la toma de decisiones informadas en el ámbito empresarial.
+En el contexto de la realización de un sistema motor de base de datos, es esencial incluir una serie de características que garanticen un funcionamiento óptimo y una gestión eficaz de la información. 
 
-Otra consideración clave es el manejo de permisos a nivel de usuarios de base de datos. Implementar un sistema de gestión de accesos es fundamental para asegurar que solo el personal autorizado pueda acceder y manipular información sensible. Esto no solo protege los datos críticos de la empresa, sino que también contribuye a la creación de un entorno de trabajo más seguro y confiable, donde se minimizan los riesgos de fraudes o errores por parte de usuarios no autorizados.
+## TEMA 1: Manejo de permisos a nivel de usuarios de base de datos
+
+Una consideración clave es el manejo de permisos a nivel de usuarios de base de datos. Implementar un sistema de gestión de accesos es fundamental para asegurar que solo el personal autorizado pueda acceder y manipular información sensible. Esto no solo protege los datos críticos de la empresa, sino que también contribuye a la creación de un entorno de trabajo más seguro y confiable, donde se minimizan los riesgos de fraudes o errores por parte de usuarios no autorizados.
 
 El manejo de permisos a nivel de usuarios en bases de datos es crucial para garantizar la seguridad y la integridad de la información. Los sistemas de gestión de bases de datos como SQL Server permiten definir roles y permisos que regulan el acceso a los datos y las operaciones que los usuarios pueden realizar. Esto incluye la posibilidad de establecer permisos específicos para diferentes roles, lo que facilita la adaptación de la seguridad a las necesidades cambiantes del negocio.
 
@@ -169,6 +171,8 @@ Sin embargo, si intentamos realizar un INSERT a la tabla con el usuario read_use
 La gestión adecuada de permisos y roles en SQL Server es crucial para garantizar la seguridad y el control de acceso a los datos. Utilizando roles fijos y definidos por el usuario, se puede simplificar la administración de permisos, asegurando que cada usuario tenga el nivel adecuado de acceso a la información según sus necesidades y responsabilidades.
 
 ## TEMA 2: PROCEDIMINETOS Y FUNCIONES ALMACENADAS (Bruno)
+
+Una de estas características son los procedimientos almacenados, que permiten la ejecución de operaciones complejas en el servidor de forma eficiente. Al integrar estos procedimientos, se reduce significativamente la posibilidad de cometer errores en la incorporación de la información, garantizando que los datos sean introducidos de manera consistente y precisa. Esto no solo optimiza la gestión de las transacciones, sino que también asegura la integridad y fiabilidad de la información, aspectos críticos para la toma de decisiones informadas en el ámbito empresarial.
 
 ### Procedimientos Almacenados en SQL Server
 Un procedimiento almacenado en SQL Server es un conjunto de instrucciones Transact-SQL o un método CLR (Common Language Runtime) de .NET que se almacena y ejecuta en el servidor. Los procedimientos pueden aceptar parámetros de entrada y devolver valores a través de parámetros de salida. También pueden realizar operaciones en la base de datos, como insertar, actualizar o eliminar datos, y devolver un valor de estado que indica si la operación fue exitosa o si hubo errores.
@@ -357,7 +361,7 @@ Por último, un sistema de gestión de base de datos bien diseñado también deb
 
 En conclusión, la implementación de un sistema gestor de base de datos efectivo es una inversión estratégica para cualquier negocio. Al incorporar innovaciones tecnológicas y considerar aspectos clave como procedimientos almacenados, manejo de permisos, optimización de consultas, y mecanismos de respaldo, las empresas pueden mejorar significativamente su eficiencia operativa, proteger su información crítica y tomar decisiones informadas que impulsen su crecimiento y competitividad en el mercado.
 
-
+## TEMA 4:
 
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
