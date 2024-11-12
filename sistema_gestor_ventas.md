@@ -1186,3 +1186,10 @@ Microsoft. (n.d.). Getting started with database engine permissions. Recuperado 
 
 IBM. (n.d.). Monitoring and creating users, granting permissions. Recuperado de https://www.ibm.com/docs/es/capm?topic=monitoring-creating-user-granting-permissions
 
+Procedimientos almacenados (motor de base de datos). Recuperado de https://learn.microsoft.com/es-es/sql/relational-databases/stored-procedures/stored-procedures-database-engine?view=sql-server-ver16
+
+Creación de un procedimiento almacenado. Recuperado de https://learn.microsoft.com/es-es/sql/relational-databases/stored-procedures/create-a-stored-procedure?view=sql-server-ver16
+
+Creación de funciones definidas por el usuario. Recuperado de https://learn.microsoft.com/es-es/training/modules/create-stored-procedures-table-valued-functions/6-create-inline
+
+Funciones frente a los procedimientos almacenados en SQL Server. Recuperado de https://www.sqlshack.com/es/funciones-frente-a-los-procedimientos-almacenados-en-sql-server/
