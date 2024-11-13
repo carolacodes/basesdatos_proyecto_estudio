@@ -174,7 +174,7 @@ Sin embargo, si intentamos realizar un INSERT a la tabla con el usuario read_use
 
 La gestión adecuada de permisos y roles en SQL Server es crucial para garantizar la seguridad y el control de acceso a los datos. Utilizando roles fijos y definidos por el usuario, se puede simplificar la administración de permisos, asegurando que cada usuario tenga el nivel adecuado de acceso a la información según sus necesidades y responsabilidades.
 
-## TEMA 2: PROCEDIMINETOS Y FUNCIONES ALMACENADAS (Bruno)
+## TEMA 2: PROCEDIMINETOS Y FUNCIONES ALMACENADAS
 
 Una de estas características son los procedimientos almacenados, que permiten la ejecución de operaciones complejas en el servidor de forma eficiente. Al integrar estos procedimientos, se reduce significativamente la posibilidad de cometer errores en la incorporación de la información, garantizando que los datos sean introducidos de manera consistente y precisa. Esto no solo optimiza la gestión de las transacciones, sino que también asegura la integridad y fiabilidad de la información, aspectos críticos para la toma de decisiones informadas en el ámbito empresarial.
 
@@ -279,7 +279,7 @@ Además, no se pueden invocar procedimientos dentro de una función, pero en un 
 
 
 
-## TEMA 3: OPTIMIZACIÓN DE CONSULTAS A TRAVÉS DE ÍNDICES: (carola)
+## TEMA 3: OPTIMIZACIÓN DE CONSULTAS A TRAVÉS DE ÍNDICES
 
 La optimización de consultas a través de índices es otra característica vital en un sistema de gestión de base de datos. Los índices permiten acelerar las búsquedas y el acceso a datos específicos, mejorando considerablemente el rendimiento del sistema. Esto es particularmente importante en negocios que manejan grandes volúmenes de información, donde el tiempo de respuesta puede afectar directamente la satisfacción del cliente y la eficiencia operativa.
 
