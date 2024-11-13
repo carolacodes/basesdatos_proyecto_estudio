@@ -279,9 +279,53 @@ select * from dbo.Venta
 go;
 select dbo.F_CantidadVentasClientes('89012345')
 
+
+
 --Operacion directa para contar las ventas que tiene un cliente por su dni
 select DNI_cliente, COUNT(cod_venta) as Ventas from dbo.Venta
 where DNI_cliente = '89012345'
 group by
 DNI_cliente
 
+
+
+
+
+
+
+go;
+
+-- Crear la función F_ProveedorProducto
+create function F_ProductosDeProvedores
+(
+-- Parámetro de entrada: id del proveedor
+@id_proveedor  int
+)
+-- La función devuelve una tabla
+Returns table
+as
+-- La consulta que genera la tabla de resultados
+
+	return(select pr.id_proveedor, pr.descripcion, pr.stock -- Selección de las columnas que se devolverán en la tabla
+
+	as Cantidad  from dbo.Producto pr    -- De qué tablas tomamos los datos
+
+	 -- Hacemos un INNER JOIN con la tabla Proveedor (p)
+	inner join dbo.Proveedor p on pr.id_proveedor = p.id_proveedor -- Relacionamos Producto con Proveedor por el campo 'id_proveedor'
+
+	-- Filtramos por el id del proveedor que se pasa como parámetro
+	where p.id_proveedor = @id_proveedor
+	)
+
+go;
+
+
+
+
+
+select * from Producto
+
+select * from Proveedor
+go;
+
+select * from F_ProductosDeProvedores(3)
