@@ -1,6 +1,8 @@
 --- Verificar el modelo de recuperación actual de la base de datos
 -- Selecciona el nombre y el modelo de recuperación de la base de datos 'sistema_gestor_de_ventas'
 
+USE sistema_gestor_de_ventas
+
 SELECT name, recovery_model_desc
 FROM sys.databases
 WHERE name = 'sistema_gestor_de_ventas';
