@@ -176,8 +176,6 @@ La gestión adecuada de permisos y roles en SQL Server es crucial para garantiza
 
 ## TEMA 2: PROCEDIMINETOS Y FUNCIONES ALMACENADAS
 
-Una de estas características son los procedimientos almacenados, que permiten la ejecución de operaciones complejas en el servidor de forma eficiente. Al integrar estos procedimientos, se reduce significativamente la posibilidad de cometer errores en la incorporación de la información, garantizando que los datos sean introducidos de manera consistente y precisa. Esto no solo optimiza la gestión de las transacciones, sino que también asegura la integridad y fiabilidad de la información, aspectos críticos para la toma de decisiones informadas en el ámbito empresarial.
-
 ### Procedimientos Almacenados en SQL Server
 Un procedimiento almacenado en SQL Server es un conjunto de instrucciones Transact-SQL o un método CLR (Common Language Runtime) de .NET que se almacena y ejecuta en el servidor. Los procedimientos pueden aceptar parámetros de entrada y devolver valores a través de parámetros de salida. También pueden realizar operaciones en la base de datos, como insertar, actualizar o eliminar datos, y devolver un valor de estado que indica si la operación fue exitosa o si hubo errores.
  
